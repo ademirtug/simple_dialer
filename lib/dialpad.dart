@@ -1,7 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:permission_handler/permission_handler.dart';
 
+  Future<bool> requestPermissions(Permission pta)async {
+    var ps = await pta.status;
+  
+    if( ps == PermissionStatus.granted )
+      return true;
 
+    if(ps == PermissionStatus.permanentlyDenied){
+      openAppSettings();
+      return false;
+    }
+
+    if( ps == PermissionStatus.denied )
+    {
+      var ps2 = await pta.request();
+
+      if( ps2 == PermissionStatus.granted )
+        return true;
+      else if(ps2 == PermissionStatus.permanentlyDenied){
+        openAppSettings();
+        return false;
+      }
+    }
+    
+    return false;
+  }
+  
 class Dialpad extends StatefulWidget {
   Dialpad({Key? key}) : super(key: key);
 
@@ -90,9 +116,14 @@ class _DialpadState extends State<Dialpad> {
 
     return ElevatedButton(
       onPressed: () async {
-        bool res = dt.getDialText().length > 0 
-        ? await FlutterPhoneDirectCaller.callNumber(dt.getDialText())
-        : false;
+        if( await requestPermissions(Permission.phone) == false )
+          return;
+
+        if( dt.getDialText().length < 1)
+          return;
+          
+
+        await FlutterPhoneDirectCaller.callNumber(dt.getDialText());
       },
       child: Icon(Icons.phone_enabled_sharp),
       style: ElevatedButton.styleFrom(

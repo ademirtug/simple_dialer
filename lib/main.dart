@@ -3,10 +3,12 @@ import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'dialpad.dart';
 
 
-void main() {
+void main() async {
+
   runApp(MyApp());
 }
 
@@ -69,7 +71,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return output;
   }
 
+
+
+
   Future<void> refreshContacts() async {
+
+    if( await requestPermissions(Permission.contacts) == false)
+      return;
+
     var cx = (await ContactsService.getContacts(withThumbnails: false, orderByGivenName: true )).toList();
     cx = await sortList(cx);
 
@@ -94,37 +103,50 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SafeArea(
         child: contacts.length > 0 
-        ? ListView.builder(
-            itemCount: contacts.length,
-            itemBuilder: (BuildContext context, int index) {
-              Contact c = contacts.elementAt(index);
-              return Column(
-                children: [
-                  ListTile(
-                    contentPadding: EdgeInsets.only( left: 3),
-                    leading: (c.avatar != null && c.avatar!.length > 0)
-                    ? CircleAvatar(radius: 30, backgroundImage: MemoryImage(c.avatar ?? Uint8List.fromList([])))
-                    : CircleAvatar(radius: 30 , child: Text(c.initials())),
-                    title: Text(c.displayName ?? "", style: TextStyle(fontSize: 20)),
-                    trailing : ClipOval(
-                      child: Material(
-                        color: Colors.transparent, // Button color
-                        child: InkWell(
-                          splashColor: Colors.grey, // Splash color
-                          onTap: ()async{
-                            bool res = c.phones!.first.value!.length > 0 
-                            ? await FlutterPhoneDirectCaller.callNumber(c.phones!.first.value ?? "")
-                            : false;
-                          },
-                          child: SizedBox(width: 56, height: 56, child: Icon(Icons.phone, size: 48)),
+        ? RefreshIndicator(child: 
+            ListView.builder(
+              itemCount: contacts.length,
+              itemBuilder: (BuildContext context, int index) {
+                Contact c = contacts.elementAt(index);
+                return Column(
+                  children: [
+                    ListTile(
+                      contentPadding: EdgeInsets.only( left: 3),
+                      leading: (c.avatar != null && c.avatar!.length > 0)
+                      ? CircleAvatar(radius: 30, backgroundImage: MemoryImage(c.avatar ?? Uint8List.fromList([])))
+                      : CircleAvatar(radius: 30 , child: Text(c.initials())),
+                      title: Text(c.displayName ?? "", style: TextStyle(fontSize: 20)),
+                      trailing : ClipOval(
+                        child: Material(
+                          color: Colors.transparent, // Button color
+                          child: c.phones!.length > 0 
+                            ? InkWell(
+                              splashColor: Colors.grey, // Splash color
+                              onTap: ()async{
+                                if( await requestPermissions(Permission.phone) == false )
+                                  return;
+
+                                // if( c.phones!.length < 1)
+                                //   return;
+                                // if( c.phones!.first.value!.length < 1 )
+                                //   return;
+
+                                bool res = c.phones!.first.value!.length > 0 
+                                ? await FlutterPhoneDirectCaller.callNumber(c.phones!.first.value ?? "")
+                                : false;
+                              },
+                              child: SizedBox(width: 56, height: 56, child: Icon(Icons.phone, size: 48)),
+                            )
+                            : Text(""),
                         ),
-                      ),
-                    )
-                  ),
-                  Divider(indent: 5,thickness: 1,height: 25,)
-                ]
-              );
-            },
+                      )
+                    ),
+                    Divider(indent: 5,thickness: 1,height: 25,)
+                  ]
+                );
+              },
+            ),
+            onRefresh: refreshContacts
           )
         : Center(child: CircularProgressIndicator()),
         ),
