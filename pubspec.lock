@@ -60,9 +60,11 @@ packages:
   contacts_service:
     dependency: "direct main"
     description:
-      name: contacts_service
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "4838a37a8036ea74f46fef4ccc48e5b5217b6dbc"
+      url: "https://github.com/ademirtug/flutter_contacts"
+    source: git
     version: "0.6.1"
   crypto:
     dependency: transitive
