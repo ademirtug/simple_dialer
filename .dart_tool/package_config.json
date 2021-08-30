@@ -51,7 +51,7 @@
     },
     {
       "name": "contacts_service",
-      "rootUri": "file:///c:/flutter/.pub-cache/git/flutter_contacts-4838a37a8036ea74f46fef4ccc48e5b5217b6dbc/",
+      "rootUri": "file:///c:/flutter/.pub-cache/git/flutter_contacts-5bcd045aa0b5f33504e089d6f6a4e021b8fe3f4d/",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -224,7 +224,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-08-30T10:13:31.196284Z",
+  "generated": "2021-08-30T10:34:50.445337Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

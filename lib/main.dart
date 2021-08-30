@@ -80,24 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if( await requestPermissions(Permission.contacts) == false)
       return;
-    Stopwatch sw  = Stopwatch();
 
-    // sw.reset();
-    // sw.start();
-
-    // List<String> csx = await platform.invokeListMethod<String>("getContacts") as List<String>;
-
-    // sw.stop();
-    // log("csx: "+sw.elapsedMilliseconds.toString());
-    
-    sw.reset();
-    sw.start();
     var cx = (await ContactsService.getContacts(withThumbnails: false, orderByGivenName: true )).toList();
-    cx = await sortList(cx);
-    
-    sw.stop();
-    log("cs: "+sw.elapsedMilliseconds.toString());
-
 
     setState(() {
       contacts = cx;

@@ -62,7 +62,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "4838a37a8036ea74f46fef4ccc48e5b5217b6dbc"
+      resolved-ref: "5bcd045aa0b5f33504e089d6f6a4e021b8fe3f4d"
       url: "https://github.com/ademirtug/flutter_contacts"
     source: git
     version: "0.6.1"
