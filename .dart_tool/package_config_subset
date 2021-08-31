@@ -42,10 +42,6 @@ crypto
 2.12
 file:///c:/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.1/
 file:///c:/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.1/lib/
-cupertino_icons
-2.12
-file:///c:/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.3/
-file:///c:/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.3/lib/
 fake_async
 2.12
 file:///c:/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0/
@@ -62,6 +58,10 @@ image
 2.12
 file:///c:/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.0.2/
 file:///c:/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.0.2/lib/
+intl
+2.12
+file:///c:/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/
+file:///c:/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/lib/
 matcher
 2.12
 file:///c:/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.10/
@@ -142,6 +142,10 @@ flutter
 2.12
 file:///c:/flutter/packages/flutter/
 file:///c:/flutter/packages/flutter/lib/
+flutter_localizations
+2.12
+file:///c:/flutter/packages/flutter_localizations/
+file:///c:/flutter/packages/flutter_localizations/lib/
 flutter_test
 2.12
 file:///c:/flutter/packages/flutter_test/

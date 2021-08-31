@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:typed_data';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dialpad.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
 
@@ -17,22 +17,23 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //Locale myLocale = Localizations.localeOf(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Simple Dialer',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Contacts'),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-
-
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -40,41 +41,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Contact> contacts = [];
-  static const platform = MethodChannel('info.pakkudev.simple_dialer/channel');
-
-
   @override
   void initState() {
     super.initState();
     refreshContacts();
   }
-
-  Future<List<Contact>> sortList(List<Contact> input) async {
-    List<String> slst = [];
-
-    String sulst = "";
-    String sslst = "";
-
-    input.forEach((element) { sulst+=(element.displayName ?? "") + ";";});
-    
-    try {
-      sslst = await platform.invokeMethod('sortList', {"arg1" : sulst}); 
-    } on PlatformException catch (e) {
-    }
-
-    slst = sslst.split(";").toList();
-
-    List<Contact> output = [];
-    slst.remove("");
-    slst.forEach((element) {
-      output.add( input.singleWhere((e) => e.displayName == element ));
-    });
-
-    return output;
-  }
-
-
-
 
   Future<void> refreshContacts() async {
 
@@ -97,10 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(AppLocalizations.of(context)!.contacts),
       ),
       body: SafeArea(
         child: contacts.length > 0 
@@ -126,15 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               onTap: ()async{
                                 if( await requestPermissions(Permission.phone) == false )
                                   return;
-
-                                // if( c.phones!.length < 1)
-                                //   return;
-                                // if( c.phones!.first.value!.length < 1 )
-                                //   return;
-
-                                bool res = c.phones!.first.value!.length > 0 
-                                ? await FlutterPhoneDirectCaller.callNumber(c.phones!.first.value ?? "")
-                                : false;
+                                await FlutterPhoneDirectCaller.callNumber(c.phones!.first.value ?? "");
                               },
                               child: SizedBox(width: 56, height: 56, child: Icon(Icons.phone, size: 48)),
                             )
