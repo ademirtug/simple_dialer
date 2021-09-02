@@ -120,7 +120,7 @@ Future<void> refreshContacts() async {
             showModalBottomSheet(
               isScrollControlled: true,
               context: context,
-              builder: (context) => Wrap(children: [Dialpad()]),
+              builder: (context) => Wrap(children: [Dialpad(primaryColor: Colors.blue)]),
             );
           },
           child: const Icon(Icons.dialpad, size: 36),

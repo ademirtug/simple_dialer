@@ -29,8 +29,9 @@ Future<bool> requestPermissions(Permission pta)async {
 }
   
 class Dialpad extends StatefulWidget {
-  Dialpad({Key? key}) : super(key: key);
-
+  Dialpad({Key? key, required Color this.primaryColor}) : super(key: key);
+  final Color primaryColor;
+  
   @override
   _DialpadState createState() => _DialpadState();
 }
@@ -40,6 +41,7 @@ class _DialpadState extends State<Dialpad> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -50,27 +52,27 @@ class _DialpadState extends State<Dialpad> {
 
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              getOvalButton("1"),
-              getOvalButton("2"),
-              getOvalButton("3")
+              getOvalButton("1", textColor: Colors.black, surfaceColor: widget.primaryColor),
+              getOvalButton("2", textColor: Colors.black, surfaceColor: widget.primaryColor),
+              getOvalButton("3", textColor: Colors.black, surfaceColor: widget.primaryColor)
             ],
           ),
           Divider(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              getOvalButton("4"),
-              getOvalButton("5"),
-              getOvalButton("6")
+              getOvalButton("4", textColor: Colors.black, surfaceColor: widget.primaryColor),
+              getOvalButton("5", textColor: Colors.black, surfaceColor: widget.primaryColor),
+              getOvalButton("6", textColor: Colors.black, surfaceColor: widget.primaryColor)
             ],
           ),
           Divider(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              getOvalButton("7"),
-              getOvalButton("8"),
-              getOvalButton("9")
+              getOvalButton("7", textColor: Colors.black, surfaceColor: widget.primaryColor),
+              getOvalButton("8", textColor: Colors.black, surfaceColor: widget.primaryColor),
+              getOvalButton("9", textColor: Colors.black, surfaceColor: widget.primaryColor)
 
             ],
           ),
@@ -79,7 +81,7 @@ class _DialpadState extends State<Dialpad> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               getOvalButton("*", textColor: Colors.black, surfaceColor: Colors.white),
-              getOvalButton("0"),
+              getOvalButton("0", textColor: Colors.black, surfaceColor: widget.primaryColor),
               getOvalButton("#", textColor: Colors.black, surfaceColor: Colors.white),
             ],
           ),
