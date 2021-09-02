@@ -47,25 +47,25 @@ class _MyHomePageState extends State<MyHomePage> {
     refreshContacts();
   }
 
-  Future<void> refreshContacts() async {
+Future<void> refreshContacts() async {
 
-    if( await requestPermissions(Permission.contacts) == false)
-      return;
+  if( await requestPermissions(Permission.contacts) == false)
+    return;
 
-    var cx = (await ContactsService.getContacts(withThumbnails: false, orderByGivenName: true )).toList();
+  var cx = (await ContactsService.getContacts(withThumbnails: false, orderByGivenName: true )).toList();
 
-    setState(() {
-      contacts = cx;
+  setState(() {
+    contacts = cx;
+  });
+
+  for (final contact in contacts) {
+    ContactsService.getAvatar(contact).then((avatar) {
+      if (avatar == null) 
+        return;
+      setState(() => contact.avatar = avatar);
     });
-
-    for (final contact in contacts) {
-      ContactsService.getAvatar(contact).then((avatar) {
-        if (avatar == null) 
-          return;
-        setState(() => contact.avatar = avatar);
-      });
-    }
   }
+}
 
   @override
   Widget build(BuildContext context) {  

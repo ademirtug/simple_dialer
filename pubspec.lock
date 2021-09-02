@@ -100,10 +100,12 @@ packages:
   flutter_phone_direct_caller:
     dependency: "direct main"
     description:
-      name: flutter_phone_direct_caller
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
+      path: "."
+      ref: HEAD
+      resolved-ref: "75d8a7839e6df8104cce012396253fc5152922ba"
+      url: "https://github.com/ademirtug/flutter-phone-direct-caller"
+    source: git
+    version: "2.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter

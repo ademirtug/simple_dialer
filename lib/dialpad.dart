@@ -2,31 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-  Future<bool> requestPermissions(Permission pta)async {
-    var ps = await pta.status;
-  
-    if( ps == PermissionStatus.granted )
-      return true;
+Future<bool> requestPermissions(Permission pta)async {
+  var ps = await pta.status;
 
-    if(ps == PermissionStatus.permanentlyDenied){
+  if( ps == PermissionStatus.granted )
+    return true;
+
+  if(ps == PermissionStatus.permanentlyDenied){
+    openAppSettings();
+    return false;
+  }
+
+  if( ps == PermissionStatus.denied )
+  {
+    var ps2 = await pta.request();
+
+    if( ps2 == PermissionStatus.granted )
+      return true;
+    else if(ps2 == PermissionStatus.permanentlyDenied){
       openAppSettings();
       return false;
     }
-
-    if( ps == PermissionStatus.denied )
-    {
-      var ps2 = await pta.request();
-
-      if( ps2 == PermissionStatus.granted )
-        return true;
-      else if(ps2 == PermissionStatus.permanentlyDenied){
-        openAppSettings();
-        return false;
-      }
-    }
-    
-    return false;
   }
+  
+  return false;
+}
   
 class Dialpad extends StatefulWidget {
   Dialpad({Key? key}) : super(key: key);
