@@ -176,8 +176,7 @@ class _DialTextState extends State<DialText> {
                 )
               )
             )
-          )
-          ,
+          ),
           GestureDetector(child: Icon(Icons.backspace_outlined, size: 36),
             onTap: (){
               setDialText(dialText.substring(0, dialText.length > 0 ? dialText.length-1 : 0));
