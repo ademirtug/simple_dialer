@@ -18,7 +18,7 @@ import android.net.*;
 import android.database.*;
 import android.content.*;
 import android.provider.ContactsContract;
-
+import android.app.AlertDialog;
 
 
 
@@ -29,7 +29,15 @@ public class MainActivity extends FlutterActivity {
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
-        
     }
  
+     @Override
+    public void onCreate(Bundle savedInstanceState) {
+
+        // use software rendering (ideally only when you need to)
+        //getIntent().putExtra("enable-software-rendering", true);
+
+        // start Flutter
+        super.onCreate(savedInstanceState);
+    }
 }
