@@ -9,4 +9,13 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get contacts => 'Rehber';
+
+  @override
+  String get recents => 'Çağrı Geçmişi';
+
+  @override
+  String get settings => 'Ayarlar';
+
+  @override
+  String get activateRecents => '\'Çağrı Geçmişi\' sekmesini etkinleştir.';
 }

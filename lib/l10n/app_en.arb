@@ -1,3 +1,6 @@
 {
-    "contacts": "Contacts"
+    "contacts": "Contacts",
+    "recents": "Recents",
+    "settings" : "Settings",
+    "activateRecents" : "Activate 'Recents' tab."
 }

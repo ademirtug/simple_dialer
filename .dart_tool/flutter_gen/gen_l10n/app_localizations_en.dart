@@ -9,4 +9,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get contacts => 'Contacts';
+
+  @override
+  String get recents => 'Recents';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get activateRecents => 'Activate \'Recents\' tab.';
 }

@@ -1,3 +1,6 @@
 {
-    "contacts": "Rehber"
+    "contacts": "Rehber",
+    "recents" : "Çağrı Geçmişi",
+    "settings" : "Ayarlar",
+    "activateRecents" : "'Çağrı Geçmişi' sekmesini etkinleştir."
 }
