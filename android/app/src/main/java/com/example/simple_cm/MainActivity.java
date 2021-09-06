@@ -1,4 +1,4 @@
-package info.pakkudev.simple_dialer;
+package dev.pakku.simple_dialer;
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
@@ -24,7 +24,7 @@ import android.app.AlertDialog;
 
 public class MainActivity extends FlutterActivity {
     Collator coll = Collator.getInstance(Locale.getDefault());
-    private static final String CHANNEL = "info.pakkudev.simple_dialer/channel";
+    private static final String CHANNEL = "dev.pakku.simple_dialer/channel";
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {

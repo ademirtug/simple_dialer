@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Contact> contacts = [];
   List<String> _tabs = [];
   PhoneContatcsSheet? pcs;
-  CallLogsSheet? cls;
+  HistorySheet? cls;
   int selectedIndex = 0;
 
   _MyHomePageState(){
@@ -99,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if(index == 0){
       return (pcs = pcs != null ? pcs : PhoneContatcsSheet());
     }else if(index == 1){
-      return (cls = cls != null ? cls: CallLogsSheet());
+      return (cls = cls != null ? cls: HistorySheet());
     }
   }
 

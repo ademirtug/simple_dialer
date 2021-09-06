@@ -4,7 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'util.dart';
   
 class Dialpad extends StatefulWidget {
-  Dialpad({Key? key, required Color this.primaryColor}) : super(key: key);
+  Dialpad({Key? key, required this.primaryColor}) : super(key: key);
   final Color primaryColor;
   
   @override

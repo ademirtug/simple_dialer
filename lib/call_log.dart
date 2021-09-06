@@ -1,9 +1,6 @@
-import 'dart:typed_data';
 import 'dart:ui';
 import 'package:call_log/call_log.dart';
-import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -12,23 +9,23 @@ import 'util.dart';
 import 'dialpad.dart';
 
 
-class CallLogsSheet extends StatefulWidget {
-  CallLogsSheet({Key? key}) : super(key: key);
+class HistorySheet extends StatefulWidget {
+  HistorySheet({Key? key}) : super(key: key);
 
   @override
-  _CallLogsSheetState createState() => _CallLogsSheetState();
+  _HistorySheetState createState() => _HistorySheetState();
 }
 
-class _CallLogsSheetState extends State<CallLogsSheet> {
+class _HistorySheetState extends State<HistorySheet> {
   List<CallLogEntry> _logs = [];
 
   @override
   void initState() {
     super.initState();
-    refreshCallLogs();
+    refreshHistory();
   }
 
-  Future<void> refreshCallLogs() async {
+  Future<void> refreshHistory() async {
     if( await requestPermissions(Permission.contacts) == false)
       return;
 
@@ -56,7 +53,7 @@ class _CallLogsSheetState extends State<CallLogsSheet> {
                 );
               },
             ),
-            onRefresh: refreshCallLogs
+            onRefresh: refreshHistory
           )
         : Center(child: CircularProgressIndicator()),
         ),
