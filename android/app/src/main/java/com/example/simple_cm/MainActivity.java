@@ -35,7 +35,7 @@ public class MainActivity extends FlutterActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         // use software rendering (ideally only when you need to)
-        //getIntent().putExtra("enable-software-rendering", true);
+        getIntent().putExtra("enable-software-rendering", true);
 
         // start Flutter
         super.onCreate(savedInstanceState);
