@@ -18,4 +18,16 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get activateRecents => '\'Çağrı Geçmişi\' sekmesini etkinleştir.';
+
+  @override
+  String get permissonNeeded => 'İzin Gerekli';
+
+  @override
+  String get defaultPhoneAppWarning => '\'Simple Dialer\' uygulamasını varsayılan Telefon uygulaması olarak belirlemelisiniz.';
+
+  @override
+  String get cancel => 'Vazgeç';
+
+  @override
+  String get openSettings => 'Ayarları Aç';
 }

@@ -2,5 +2,9 @@
     "contacts": "Rehber",
     "recents" : "Çağrı Geçmişi",
     "settings" : "Ayarlar",
-    "activateRecents" : "'Çağrı Geçmişi' sekmesini etkinleştir."
+    "activateRecents" : "'Çağrı Geçmişi' sekmesini etkinleştir.",
+    "permissonNeeded" : "İzin Gerekli",
+    "defaultPhoneAppWarning" : "'Simple Dialer' uygulamasını varsayılan Telefon uygulaması olarak belirlemelisiniz.",
+    "cancel" : "Vazgeç",
+    "openSettings" : "Ayarları Aç"
 }

@@ -18,6 +18,18 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get activateRecents => 'Ative a guia \'Histórico\'';
+
+  @override
+  String get permissonNeeded => 'Permissão Necessária';
+
+  @override
+  String get defaultPhoneAppWarning => 'Você precisa definir \'Simple Dialer\' como seu aplicativo de Telefone padrão.';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get openSettings => 'Abrir Configurações';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -35,4 +47,16 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get activateRecents => 'Ative a guia \'Histórico\'';
+
+  @override
+  String get permissonNeeded => 'Permissão Necessária';
+
+  @override
+  String get defaultPhoneAppWarning => 'Você precisa definir \'Simple Dialer\' como seu aplicativo de Telefone padrão.';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get openSettings => 'Abrir Configurações';
 }

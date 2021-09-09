@@ -13,10 +13,8 @@ import io.flutter.plugin.common.MethodChannel.Result;
 
 import android.content.*;
 import android.content.pm.*;
-import android.os.BatteryManager;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
-import android.os.Bundle;
+import android.os.Build.*;
+import android.os.*;
 import android.net.*;
 import android.database.*;
 import android.provider.ContactsContract;
@@ -63,8 +61,12 @@ public class MainActivity extends FlutterActivity {
     }
 
     private String getDefaultDialer() {
-        TelecomManager tm = (TelecomManager) getSystemService(TELECOM_SERVICE);
-        return tm.getDefaultDialerPackage();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
+            TelecomManager tm = (TelecomManager) getSystemService(TELECOM_SERVICE);
+            return tm.getDefaultDialerPackage();
+        }else{
+            return "dev.pakku.simple_dialer";
+        }
     }
     private String getDefaultDialer2 (){
         Intent mainIntent = new Intent(Intent.ACTION_DIAL, null);
@@ -77,9 +79,23 @@ public class MainActivity extends FlutterActivity {
             return "";
         }
     }
+    private String getDefaultDialer3 (){
+        Intent mainIntent = new Intent(Intent.ACTION_DIAL, null);
+        mainIntent.addCategory(Intent.CATEGORY_DEFAULT);
+        final ResolveInfo mInfo = getPackageManager().resolveActivity(mainIntent, 0);;
 
-    private void openDefaultAppsSettings(){
-
+        if( mInfo != null)
+            return mInfo.activityInfo.applicationInfo.packageName;
+        else
+            return "";
+    }
+    private boolean openDefaultAppsSettings(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
+            startActivity(new Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS));
+        }else{
+            startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
+        }
+        return true;
     }
 
 

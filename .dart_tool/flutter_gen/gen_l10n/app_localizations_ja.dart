@@ -18,4 +18,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get activateRecents => '通話履歴」タブを有効にする';
+
+  @override
+  String get permissonNeeded => '必要な許可 ';
+
+  @override
+  String get defaultPhoneAppWarning => 'デフォルトの電話アプリとして「Simple Dialer」を設定する必要があります。';
+
+  @override
+  String get cancel => 'キャンセル';
+
+  @override
+  String get openSettings => '設定を開く';
 }

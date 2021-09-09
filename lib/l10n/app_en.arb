@@ -2,5 +2,9 @@
     "contacts": "Contacts",
     "recents": "Recents",
     "settings" : "Settings",
-    "activateRecents" : "Activate 'Recents' tab."
+    "activateRecents" : "Activate 'Recents' tab.",
+    "permissonNeeded" : "Permission Needed",
+    "defaultPhoneAppWarning" : "You need to set 'Simple Dialer' as your default Phone app.",
+    "cancel" : "Cancel",
+    "openSettings" : "Open Settings"
 }

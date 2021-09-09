@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,10 +12,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  
-  
   bool _activateRecents = false;
-  bool _isdefaultDialer = false;
 
   _SettingsPageState() {
     readValues();
@@ -34,15 +30,20 @@ class _SettingsPageState extends State<SettingsPage> {
             SwitchListTile(
               value: _activateRecents, 
               onChanged: (v)async {
-                if(!(await isDefaultDialer())){
-                  
+                if( v == true ){
+                  if(!(await isDefaultDialer())){
+                    showAlertDialog(context);
+                    return;
+                  }
                 }
+
                 setState(() {
                   _activateRecents = v;
                 });
                 
                 SharedPreferences prefs = await SharedPreferences.getInstance();
                 prefs.setBool("activateRecents", v);
+
               },
              title: Text(AppLocalizations.of(context)!.activateRecents),)
           ],
@@ -56,7 +57,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
     if(await isDefaultDialer()){
       setState(() {
-        _isdefaultDialer = true;
         _activateRecents = prefs.getBool("activateRecents") ?? false;
       });
     }else{
@@ -64,6 +64,44 @@ class _SettingsPageState extends State<SettingsPage> {
       prefs.setBool("activateRecents", false);
     }
   }
+
+
+  void showAlertDialog(BuildContext context) {
+
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text(AppLocalizations.of(context)!.cancel),
+      onPressed:  () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text(AppLocalizations.of(context)!.openSettings),
+      onPressed:  () {
+        openDefaultAppsSettings();
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(AppLocalizations.of(context)!.permissonNeeded),
+      content: Text(AppLocalizations.of(context)!.defaultPhoneAppWarning),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }
 
 

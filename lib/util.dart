@@ -12,7 +12,9 @@ Future<bool> isDefaultDialer() async {
     return true;
   return false;
 }
-
+Future<void> openDefaultAppsSettings() async {
+  await channel.invokeMethod("openDefaultAppsSettings");
+}
 Future<bool> requestPermissions(Permission pta)async {
   var ps = await pta.status;
 

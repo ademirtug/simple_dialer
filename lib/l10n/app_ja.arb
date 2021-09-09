@@ -2,5 +2,9 @@
     "contacts": "連絡先",
     "recents": "通話履歴",
     "settings" : "設定",
-    "activateRecents" : "通話履歴」タブを有効にする"
+    "activateRecents" : "通話履歴」タブを有効にする",
+    "permissonNeeded" : "必要な許可 ",
+    "defaultPhoneAppWarning" : "デフォルトの電話アプリとして「Simple Dialer」を設定する必要があります。",
+    "cancel" : "キャンセル",
+    "openSettings" : "設定を開く"
 }

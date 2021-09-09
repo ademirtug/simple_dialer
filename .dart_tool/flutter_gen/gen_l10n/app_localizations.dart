@@ -122,6 +122,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Activate \'Recents\' tab.'**
   String get activateRecents;
+
+  /// No description provided for @permissonNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission Needed'**
+  String get permissonNeeded;
+
+  /// No description provided for @defaultPhoneAppWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'You need to set \'Simple Dialer\' as your default Phone app.'**
+  String get defaultPhoneAppWarning;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @openSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get openSettings;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

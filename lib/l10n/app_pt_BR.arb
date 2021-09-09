@@ -2,5 +2,9 @@
     "contacts": "Contactos",
     "recents": "Histórico",
     "settings" : "Definições",
-    "activateRecents" : "Ative a guia 'Histórico'"
+    "activateRecents" : "Ative a guia 'Histórico'",
+    "permissonNeeded" : "Permissão Necessária",
+    "defaultPhoneAppWarning" : "Você precisa definir 'Simple Dialer' como seu aplicativo de Telefone padrão.",
+    "cancel" : "Cancelar",
+    "openSettings" : "Abrir Configurações"
 }
