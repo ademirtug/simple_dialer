@@ -1,0 +1,10 @@
+{
+    "contacts": "संपर्क",
+    "recents": "कॉल इतिहास",
+    "settings" : "समायोजन",
+    "activateRecents" : "'कॉल इतिहास' टैब सक्रिय करें।",
+    "permissonNeeded" : "अनुमति की आवश्यकता",
+    "defaultPhoneAppWarning" : "अनुमति की आवश्यकता हैआपको 'Simple Dialer' को अपने डिफ़ॉल्ट फ़ोन ऐप के रूप में सेट करने की आवश्यकता है।",
+    "cancel" : "रद्द करें",
+    "openSettings" : "सेटिंग्स खोलें"
+}
