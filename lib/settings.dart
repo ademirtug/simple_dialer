@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,9 +13,12 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  static const MethodChannel _channel = const MethodChannel('dev.pakku.simple_dialer/channel');
+  
   bool _activateRecents = false;
-  _SettingsPageState(){
+  _SettingsPageState() {
     readValues();
+    
   }
   @override
   Widget build(BuildContext context) {
@@ -43,6 +47,8 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void readValues() async{
+    String dialer = await _channel.invokeMethod("getDefaultDialer");
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _activateRecents = prefs.getBool("activateRecents") ?? false;
