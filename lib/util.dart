@@ -1,9 +1,17 @@
 import 'package:contacts_service/contacts_service.dart';
+import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
 List<Contact> contacts = [];
+const MethodChannel channel = const MethodChannel('dev.pakku.simple_dialer/channel');
 
+Future<bool> isDefaultDialer() async {
+  String dialer = await channel.invokeMethod("getDefaultDialer");
+  if(dialer == "dev.pakku.simple_dialer")
+    return true;
+  return false;
+}
 
 Future<bool> requestPermissions(Permission pta)async {
   var ps = await pta.status;

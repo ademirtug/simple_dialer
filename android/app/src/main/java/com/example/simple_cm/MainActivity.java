@@ -12,6 +12,7 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
 import android.content.*;
+import android.content.pm.*;
 import android.os.BatteryManager;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -38,20 +39,10 @@ public class MainActivity extends FlutterActivity {
                 case "getDefaultDialer": {
                     result.success(getDefaultDialer());
                     break;
-
-                // final SimContact contact = SimContact.fromMap((HashMap)call.arguments);
-                // String sr = this.addSimContact(contact);
-                // if (sr.isEmpty()) {
-                //   result.success(null);
-                // } else {
-                //   result.error(null, "Failed to add the contact: "+sr, null);
-                // }
-                // break;
                 }
-                
                 default: {
-                result.notImplemented();
-                break;
+                    result.notImplemented();
+                    break;
                 }
             }
           }
@@ -69,8 +60,19 @@ public class MainActivity extends FlutterActivity {
     }
 
     private String getDefaultDialer() {
-        TelecomManager manger= (TelecomManager) getSystemService(TELECOM_SERVICE);
-        return manger.getDefaultDialerPackage();
+        TelecomManager tm = (TelecomManager) getSystemService(TELECOM_SERVICE);
+        return tm.getDefaultDialerPackage();
+    }
+    private String getDefaultDialer2 (){
+        Intent mainIntent = new Intent(Intent.ACTION_DIAL, null);
+        mainIntent.addCategory(Intent.CATEGORY_DEFAULT);
+        List<ResolveInfo> pkgAppsList = getPackageManager().queryIntentActivities(mainIntent, 0);
+        if( !pkgAppsList.isEmpty() ) {
+            ActivityInfo info = pkgAppsList.get(0).activityInfo;
+            return info.packageName;
+        }else {
+            return "";
+        }
     }
 
 

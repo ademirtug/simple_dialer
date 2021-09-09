@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'util.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -13,9 +13,11 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  static const MethodChannel _channel = const MethodChannel('dev.pakku.simple_dialer/channel');
+  
   
   bool _activateRecents = false;
+  bool _isdefaultDialer = false;
+
   _SettingsPageState() {
     readValues();
     
@@ -32,6 +34,9 @@ class _SettingsPageState extends State<SettingsPage> {
             SwitchListTile(
               value: _activateRecents, 
               onChanged: (v)async {
+                if(!(await isDefaultDialer())){
+                  
+                }
                 setState(() {
                   _activateRecents = v;
                 });
@@ -47,12 +52,17 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void readValues() async{
-    String dialer = await _channel.invokeMethod("getDefaultDialer");
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      _activateRecents = prefs.getBool("activateRecents") ?? false;
-    });
+
+    if(await isDefaultDialer()){
+      setState(() {
+        _isdefaultDialer = true;
+        _activateRecents = prefs.getBool("activateRecents") ?? false;
+      });
+    }else{
+      _activateRecents = false;
+      prefs.setBool("activateRecents", false);
+    }
   }
 }
 
