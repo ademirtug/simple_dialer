@@ -1,4 +1,4 @@
-package dev.pakku.simple_dialer;
+package info.pakkudev.simple_dialer;
 
 
 import androidx.annotation.NonNull;
@@ -25,7 +25,7 @@ import java.util.*;
 
 public class MainActivity extends FlutterActivity {
     Collator coll = Collator.getInstance(Locale.getDefault());
-    private static final String CHANNEL = "dev.pakku.simple_dialer/channel";
+    private static final String CHANNEL = "info.pakkudev.simple_dialer/channel";
 
   @Override
   public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
@@ -65,7 +65,7 @@ public class MainActivity extends FlutterActivity {
             TelecomManager tm = (TelecomManager) getSystemService(TELECOM_SERVICE);
             return tm.getDefaultDialerPackage();
         }else{
-            return "dev.pakku.simple_dialer";
+            return "info.pakkudev.simple_dialer";
         }
     }
     private String getDefaultDialer2 (){
@@ -97,6 +97,4 @@ public class MainActivity extends FlutterActivity {
         }
         return true;
     }
-
-
 }

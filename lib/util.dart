@@ -4,11 +4,11 @@ import 'package:permission_handler/permission_handler.dart';
 
 
 List<Contact> contacts = [];
-const MethodChannel channel = const MethodChannel('dev.pakku.simple_dialer/channel');
+const MethodChannel channel = const MethodChannel('info.pakkudev.simple_dialer/channel');
 
 Future<bool> isDefaultDialer() async {
   String dialer = await channel.invokeMethod("getDefaultDialer");
-  if(dialer == "dev.pakku.simple_dialer")
+  if(dialer == "info.pakkudev.simple_dialer")
     return true;
   return false;
 }
