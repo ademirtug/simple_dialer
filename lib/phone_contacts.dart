@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'util.dart';
@@ -16,7 +15,6 @@ class PhoneContatcsSheet extends StatefulWidget {
 }
 
 class _PhoneContatcsSheetState extends State<PhoneContatcsSheet> {
-  static const MethodChannel _channel = const MethodChannel('dev.pakku.sim_contact_manager');
   List<String> providers = [];
 
   @override
@@ -62,36 +60,6 @@ class _PhoneContatcsSheetState extends State<PhoneContatcsSheet> {
                 return Column(
                   children: [
                     ContactTile(contact: c),
-                    // ListTile(
-                    //   contentPadding: EdgeInsets.only( left: 3),
-                    //   leading: (c.avatar != null && c.avatar!.length > 0)
-                    //   ? CircleAvatar(radius: 30, backgroundImage: MemoryImage(c.avatar ?? Uint8List.fromList([])))
-                    //   : CircleAvatar(radius: 30 , child: Text(c.initials())),
-                    //   title: Text(c.displayName ?? "", style: TextStyle(fontSize: 20)),
-                    //   trailing : ClipOval(
-                    //     child: Material(
-                    //       color: Colors.transparent, // Button color
-                    //       child: c.phones!.length > 0 
-                    //         ? InkWell(
-                    //           splashColor: Colors.grey, // Splash color
-                    //           onTap: ()async{
-                    //             if( await requestPermissions(Permission.phone) == false )
-                    //               return;
-
-                    //             // if( c.phones!.length < 1)
-                    //             //   return;
-                    //             // if( c.phones!.first.value!.length < 1 )
-                    //             //   return;
-
-                    //             await FlutterPhoneDirectCaller.callNumber(c.phones!.first.value ?? "");
-                                
-                    //           },
-                    //           child: SizedBox(width: 56, height: 56, child: Icon(Icons.phone, size: 48)),
-                    //         )
-                    //         : Text(""),
-                    //     ),
-                    //   )
-                    // ),
                     Divider(indent: 5,thickness: 1,height: 25,)
                   ]
                 );

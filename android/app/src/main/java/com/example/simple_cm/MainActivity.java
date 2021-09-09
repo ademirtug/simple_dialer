@@ -40,6 +40,10 @@ public class MainActivity extends FlutterActivity {
                     result.success(getDefaultDialer());
                     break;
                 }
+                case "openDefaultAppsSettings":{
+                    result.success(openDefaultAppsSettings());
+                    break;
+                }
                 default: {
                     result.notImplemented();
                     break;
@@ -51,7 +55,6 @@ public class MainActivity extends FlutterActivity {
  
      @Override
     public void onCreate(Bundle savedInstanceState) {
-
         // use software rendering (ideally only when you need to)
         getIntent().putExtra("enable-software-rendering", true);
 
@@ -73,6 +76,10 @@ public class MainActivity extends FlutterActivity {
         }else {
             return "";
         }
+    }
+
+    private void openDefaultAppsSettings(){
+
     }
 
 
