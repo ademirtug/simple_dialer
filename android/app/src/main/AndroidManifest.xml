@@ -47,7 +47,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <!-- android:name="info.pakkudev.simple_dialer.incallservice" -->
         <service
+            
             android:name=".CallService"
             android:permission="android.permission.BIND_INCALL_SERVICE">
             <meta-data

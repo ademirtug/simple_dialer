@@ -43,7 +43,7 @@ public class MainActivity extends FlutterActivity {
                     break;
                 }
                 case "userConsent":{
-                    result.success(userConsent());
+                    result.success(true);
                     break;
                 }
                 default: {
@@ -102,19 +102,13 @@ public class MainActivity extends FlutterActivity {
             startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
         }
         return true;
-
-        if (getSystemService(TelecomManager::class.java).defaultDialerPackage != packageName) {
-            Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
-            .putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, packageName)
-            .let(::startActivity)
-}
     }
-    private boolean userConsent(){
-        if (getSystemService(TelecomManager::class.java).defaultDialerPackage != packageName) {
-            Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
-            .putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, packageName)
-            .let(::startActivity);
-        }
-        return true;
-    }
+    // private boolean userConsent(){
+    //     if (getSystemService(TelecomManager::class.java).defaultDialerPackage != packageName) {
+    //         Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
+    //         .putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, packageName)
+    //         .let(::startActivity);
+    //     }
+    //     return true;
+    // }
 }
