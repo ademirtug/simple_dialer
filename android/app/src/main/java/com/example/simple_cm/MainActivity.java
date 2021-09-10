@@ -110,7 +110,6 @@ public class MainActivity extends FlutterActivity {
 }
     }
     private boolean userConsent(){
-
         if (getSystemService(TelecomManager::class.java).defaultDialerPackage != packageName) {
             Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
             .putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, packageName)
