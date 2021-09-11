@@ -4,41 +4,46 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.*;
 import android.widget.*;
 import android.os.Bundle;
-import android.telecom.VideoProfile;
 import android.app.ActivityManager.AppTask ;
 import android.os.Build.*;
 import android.os.*;
+import android.telecom.*;
+import android.content.*;
 
-public class incall_activity extends AppCompatActivity {
+
+public class IncomingCallActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_incall);
+        setContentView(R.layout.activity_incoming_call);
 
-        Button acceptButton = (Button) findViewById(R.id.accept);
+        ImageButton acceptButton = (ImageButton) findViewById(R.id.accept);
+        OngoingCallData.OngoingCallDataActivity = this;
+
         acceptButton.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
-                //call.answer(VideoProfile.STATE_AUDIO_ONLY);
-                new OngoingCall().answer();
-                acceptButton.setVisibility(View.GONE);
+                new OngoingCallData().answer();
+                Intent ongoingCallScreen = new Intent(IncomingCallActivity.this, OngoingCallActivity.class);
+                ongoingCallScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(ongoingCallScreen);
+                finish();
             }
         });
         
-        Button rejectButton = (Button) findViewById(R.id.reject);
+        ImageButton rejectButton = (ImageButton) findViewById(R.id.reject);
         rejectButton.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
-                //call.answer(VideoProfile.STATE_AUDIO_ONLY);
-                new OngoingCall().hangup();
+                new OngoingCallData().dismiss();
                 finish();
             }
         });
 
         TextView displayName = (TextView)findViewById(R.id.displayName);
-        displayName.setText(new OngoingCall().getDisplayName()); 
-
+        displayName.setText(new OngoingCallData().getContactDisplayName());
 
     }
+
     @Override
     public void finish() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
