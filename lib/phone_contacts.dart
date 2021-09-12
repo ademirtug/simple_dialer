@@ -113,16 +113,9 @@ class _ContactTileSheetState extends State<ContactTile> {
             ? InkWell(
               splashColor: Colors.grey, // Splash color
               onTap: ()async{
-                if( await requestPermissions(Permission.phone) == false )
-                  return;
-
-                // if( c.phones!.length < 1)
+                // if( await requestPermissions(Permission.byValue(value).phone) == false )
                 //   return;
-                // if( c.phones!.first.value!.length < 1 )
-                //   return;
-
                 await FlutterPhoneDirectCaller.callNumber(c.phones!.first.value ?? "");
-                
               },
               child: SizedBox(width: 56, height: 56, child: Icon(Icons.phone, size: 48)),
             )
