@@ -19,29 +19,41 @@ public class IncomingCallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_incoming_call);
 
         ImageButton acceptButton = (ImageButton) findViewById(R.id.accept);
-        OngoingCallData.OngoingCallDataActivity = this;
+        SimpleDialerCallService.csh.oca = this;
 
         acceptButton.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
-                new OngoingCallData().answer();
+                SimpleDialerCallService.csh.answer();
+
                 Intent ongoingCallScreen = new Intent(IncomingCallActivity.this, OngoingCallActivity.class);
                 ongoingCallScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(ongoingCallScreen);
-                finish();
             }
         });
         
         ImageButton rejectButton = (ImageButton) findViewById(R.id.reject);
         rejectButton.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
-                new OngoingCallData().dismiss();
-                finish();
+                SimpleDialerCallService.csh.dismiss();
             }
         });
 
-        TextView displayName = (TextView)findViewById(R.id.displayName);
-        displayName.setText(new OngoingCallData().getContactDisplayName());
+        String dn = SimpleDialerCallService.csh.getCallerDisplayName(getContentResolver()).trim();
+        String pn = SimpleDialerCallService.csh.getCallPhoneNumber().trim();
 
+        TextView currentAction = (TextView)findViewById(R.id.currentAction);
+        currentAction.setText( SimpleDialerCallService.csh.isIncomingCall() ? R.string.incomingCall : R.string.makingCall);
+
+        TextView displayName = (TextView)findViewById(R.id.displayName);
+        displayName.setText(dn);
+
+        if( dn.isEmpty() ){
+            displayName.setText(pn);
+        }
+        if( !dn.equals(pn) ){
+            TextView callingNumber = (TextView)findViewById(R.id.callingNumber);
+            callingNumber.setText(pn);    
+        }
     }
 
     @Override

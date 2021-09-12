@@ -30,4 +30,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get openSettings => 'Open Settings';
+
+  @override
+  String get setAsDefaultPhoneApp => 'Set as default Phone app';
+
+  @override
+  String get makeDefault => 'Make Default';
+
+  @override
+  String get makeDefaultMessage => 'Would you like to set \'Simple Dialer\' as your default Phone app?';
+
+  @override
+  String get neverAsk => 'Never ask again.';
 }

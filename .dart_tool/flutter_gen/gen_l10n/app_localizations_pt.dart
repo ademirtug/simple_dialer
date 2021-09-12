@@ -30,6 +30,18 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get openSettings => 'Abrir Configurações';
+
+  @override
+  String get setAsDefaultPhoneApp => 'Definir como aplicativo de Telefone padrão';
+
+  @override
+  String get makeDefault => 'Tornar Padrão';
+
+  @override
+  String get makeDefaultMessage => 'Gostaria de definir \'Discador simples\' como seu aplicativo de Telefone padrão?';
+
+  @override
+  String get neverAsk => 'Nunca pergunte de novo.';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -59,4 +71,16 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get openSettings => 'Abrir Configurações';
+
+  @override
+  String get setAsDefaultPhoneApp => 'Definir como aplicativo de Telefone padrão';
+
+  @override
+  String get makeDefault => 'Tornar Padrão';
+
+  @override
+  String get makeDefaultMessage => 'Gostaria de definir \'Discador simples\' como seu aplicativo de Telefone padrão?';
+
+  @override
+  String get neverAsk => 'Nunca pergunte de novo.';
 }

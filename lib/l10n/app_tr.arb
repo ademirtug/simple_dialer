@@ -6,5 +6,9 @@
     "permissonNeeded" : "İzin Gerekli",
     "defaultPhoneAppWarning" : "'Simple Dialer' uygulamasını varsayılan Telefon uygulaması olarak belirlemelisiniz.",
     "cancel" : "Vazgeç",
-    "openSettings" : "Ayarları Aç"
+    "openSettings" : "Ayarları Aç",
+    "setAsDefaultPhoneApp":"Varsayılan Telefon uygulaması olarak ayarla", 
+    "makeDefault" : "Varsayılan Yap",
+    "makeDefaultMessage" : "'Simple Dialer' uygulamasını varsayılan Telefon uygulamanız yapmak ister misiniz?",
+    "neverAsk" : "Tekrar sorma."
 }

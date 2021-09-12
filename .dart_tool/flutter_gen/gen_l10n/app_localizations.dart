@@ -148,6 +148,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Open Settings'**
   String get openSettings;
+
+  /// No description provided for @setAsDefaultPhoneApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as default Phone app'**
+  String get setAsDefaultPhoneApp;
+
+  /// No description provided for @makeDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Make Default'**
+  String get makeDefault;
+
+  /// No description provided for @makeDefaultMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Would you like to set \'Simple Dialer\' as your default Phone app?'**
+  String get makeDefaultMessage;
+
+  /// No description provided for @neverAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Never ask again.'**
+  String get neverAsk;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

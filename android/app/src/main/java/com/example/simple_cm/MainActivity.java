@@ -83,18 +83,6 @@ public class MainActivity extends FlutterActivity {
             return "";
         }
     }
-    private String getDefaultDialer3 (){
-        Intent mainIntent = new Intent(Intent.ACTION_DIAL, null);
-        mainIntent.addCategory(Intent.CATEGORY_DEFAULT);
-        final ResolveInfo mInfo = getPackageManager().resolveActivity(mainIntent, 0);;
-
-        if( mInfo != null)
-            return mInfo.activityInfo.applicationInfo.packageName;
-        else
-            return "";
-
-
-    }
     private boolean openDefaultAppsSettings(){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
             startActivity(new Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS));

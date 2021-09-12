@@ -92,7 +92,10 @@ class _CallLogTileSheetState extends State<CallLogTile> {
     var x = timeago.format(ct, locale: "${window.locale.languageCode}"/*_${window.locale.countryCode}"*/);
     return ListTile(
       contentPadding: EdgeInsets.only( left: 3),
-      leading: CircleAvatar(radius: 30 , child: Icon(getIconByCallType(widget.cle.callType))),
+      leading: CircleAvatar(
+        radius: 30,
+        backgroundColor: getColorByCallType(widget.cle.callType), 
+        child: Icon(getIconByCallType(widget.cle.callType))),
       title: Text(vn ?? "", style: TextStyle(fontSize: 20)),
       subtitle: Text(x),
       trailing : ClipOval(
@@ -150,6 +153,21 @@ class _CallLogTileSheetState extends State<CallLogTile> {
       }
       default:
         return Icons.call_made;
+    }
+  }
+
+  getColorByCallType(CallType? callType) {
+    switch(callType){
+      case CallType.incoming:
+      case CallType.outgoing:{
+        return Colors.green;
+      }
+      case CallType.missed:
+      case CallType.rejected:{
+        return Colors.red;
+      }
+      default:
+        return Colors.green;
     }
   }
 }

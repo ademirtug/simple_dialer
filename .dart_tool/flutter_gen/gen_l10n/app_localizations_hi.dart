@@ -30,4 +30,16 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get openSettings => 'सेटिंग्स खोलें';
+
+  @override
+  String get setAsDefaultPhoneApp => 'डिफ़ॉल्ट फ़ोन ऐप के रूप में सेट करें';
+
+  @override
+  String get makeDefault => 'डिफ़ॉल्ट बनाना';
+
+  @override
+  String get makeDefaultMessage => 'क्या आप \'साधारण डायलर\' को अपने डिफ़ॉल्ट फ़ोन ऐप के रूप में सेट करना चाहेंगे?';
+
+  @override
+  String get neverAsk => 'फिर कभी मत पूछो';
 }

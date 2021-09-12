@@ -6,5 +6,10 @@
     "permissonNeeded" : "Permission Needed",
     "defaultPhoneAppWarning" : "You need to set 'Simple Dialer' as your default Phone app.",
     "cancel" : "Cancel",
-    "openSettings" : "Open Settings"
+    "openSettings" : "Open Settings",
+    "setAsDefaultPhoneApp":"Set as default Phone app", 
+    "makeDefault" : "Make Default",
+    "makeDefaultMessage" : "Would you like to set 'Simple Dialer' as your default Phone app?",
+    "neverAsk" : "Never ask again."
+
 }

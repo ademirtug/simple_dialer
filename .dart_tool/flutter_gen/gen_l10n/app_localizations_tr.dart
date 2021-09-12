@@ -30,4 +30,16 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get openSettings => 'Ayarları Aç';
+
+  @override
+  String get setAsDefaultPhoneApp => 'Varsayılan Telefon uygulaması olarak ayarla';
+
+  @override
+  String get makeDefault => 'Varsayılan Yap';
+
+  @override
+  String get makeDefaultMessage => '\'Simple Dialer\' uygulamasını varsayılan Telefon uygulamanız yapmak ister misiniz?';
+
+  @override
+  String get neverAsk => 'Tekrar sorma.';
 }

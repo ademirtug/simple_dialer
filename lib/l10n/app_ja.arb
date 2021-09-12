@@ -6,5 +6,9 @@
     "permissonNeeded" : "必要な許可 ",
     "defaultPhoneAppWarning" : "デフォルトの電話アプリとして「Simple Dialer」を設定する必要があります。",
     "cancel" : "キャンセル",
-    "openSettings" : "設定を開く"
+    "openSettings" : "設定を開く",
+    "setAsDefaultPhoneApp":"デフォルトの電話アプリとして設定", 
+    "makeDefault" : "デフォルトにする",
+    "makeDefaultMessage" : "デフォルトの電話アプリとして「シンプルダイヤラ」を設定しますか",
+    "neverAsk" : "二度と聞かない"
 }

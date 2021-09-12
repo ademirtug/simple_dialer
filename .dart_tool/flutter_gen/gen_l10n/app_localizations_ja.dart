@@ -30,4 +30,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get openSettings => '設定を開く';
+
+  @override
+  String get setAsDefaultPhoneApp => 'デフォルトの電話アプリとして設定';
+
+  @override
+  String get makeDefault => 'デフォルトにする';
+
+  @override
+  String get makeDefaultMessage => 'デフォルトの電話アプリとして「シンプルダイヤラ」を設定しますか';
+
+  @override
+  String get neverAsk => '二度と聞かない';
 }

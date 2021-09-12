@@ -5,31 +5,30 @@ import android.telecom.InCallService;
 import android.telecom.VideoProfile;
 import android.os.PowerManager;
 import android.content.*;
+import android.app.KeyguardManager;
+
 
 public class SimpleDialerCallService extends InCallService {
     PowerManager.WakeLock wakeLock, proximityLock;
-
+    public static CallStateHandler csh = null;
 
     @Override
     public void onCallAdded(Call call) {
         super.onCallAdded(call);
 
+        csh = new CallStateHandler(this, call);
+
+        KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        KeyguardManager.KeyguardLock kl = km .newKeyguardLock("SD KEYGUARDLOCK");
+        kl.disableKeyguard();
+
+
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
 
-        new OngoingCallData().setCall(call);
-        if(call.getDetails().getCallDirection() == Call.Details.DIRECTION_OUTGOING){
-            Intent ongoingCallScreen = new Intent(this, OngoingCallActivity.class);
-            ongoingCallScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(ongoingCallScreen);
-        }else{
-                    
+        if( call.getState() == Call.STATE_RINGING ){
             wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "SD WAKE LOCK");
             wakeLock.acquire();
-
-            Intent incomingCallScreen = new Intent(this, IncomingCallActivity.class);
-            incomingCallScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(incomingCallScreen);
-
+            csh.onStateChanged(call, Call.STATE_RINGING);
             wakeLock.release();
         }
         
@@ -41,10 +40,10 @@ public class SimpleDialerCallService extends InCallService {
     public void onCallRemoved(Call call) {
         super.onCallRemoved(call);
 
-        new OngoingCallData().dismiss();
-       
-        if( proximityLock != null ){
+        if(csh!=null)
+            csh.dismiss();
+
+        if( proximityLock != null )
             proximityLock.release();
-        }
     }
 }
