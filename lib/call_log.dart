@@ -26,7 +26,7 @@ class _HistorySheetState extends State<HistorySheet> {
   }
 
   Future<void> refreshHistory() async {
-    if( await requestPermissions(Permission.contacts) == false)
+    if( await requestPermissions(Permission.log) == false)
       return;
 
     var clx = (await CallLog.get()).toList();
