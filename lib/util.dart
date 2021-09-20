@@ -26,7 +26,8 @@ Future<void> openDefaultAppsSettings() async {
 Future<bool> requestPermissions(Permission pta)async {
 
   if(!askedToBeDefaultDialer){
-    await askToBeDefautDialer();
+    
+    askToBeDefautDialer();
     askedToBeDefaultDialer = true;
     return false;
   }

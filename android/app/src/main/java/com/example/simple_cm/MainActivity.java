@@ -26,6 +26,8 @@ import java.util.*;
 public class MainActivity extends FlutterActivity {
     Collator coll = Collator.getInstance(Locale.getDefault());
     private static final String CHANNEL = "info.pakkudev.simple_dialer/channel";
+    int DEFAULT_DIALER_RESULT_CODE = 0;
+    MethodChannel.Result res;
 
   @Override
   public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
@@ -33,13 +35,14 @@ public class MainActivity extends FlutterActivity {
     new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
         .setMethodCallHandler(
           (call, result) -> {
+            res = result;
             switch(call.method){
                 case "getDefaultDialer": {
                     result.success(getDefaultDialer());
                     break;
                 }
                 case "askToBeDefaultDialer" :{
-                    result.success(askToBeDefaultDialer());
+                    askToBeDefaultDialer();
                     break;
                 }
                 case "openDefaultAppsSettings":{
@@ -69,11 +72,16 @@ public class MainActivity extends FlutterActivity {
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // use software rendering (ideally only when you need to)
-        getIntent().putExtra("enable-software-rendering", true);
+        super.onActivityResult(requestCode, resultCode, data);
 
-        // start Flutter
-        super.onCreate(savedInstanceState);
+        // check that it is the SecondActivity with an OK result
+        if (requestCode == DEFAULT_DIALER_RESULT_CODE) {
+            if (resultCode == RESULT_OK) { // Activity.RESULT_OK
+                
+            }
+
+            res.success(true);
+        }
     }
     private String getDefaultDialer() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
@@ -84,15 +92,11 @@ public class MainActivity extends FlutterActivity {
         }
     }
     private String askToBeDefaultDialer() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
+        //if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
             Intent intent = new Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER);
             intent.putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, getActivity().getPackageName());
-            startActivityForResult(intent, 1);
-            //setResult(1,intent);
-            
-        }else{
-            //return "info.pakkudev.simple_dialer";
-        }
+            startActivityForResult(intent, DEFAULT_DIALER_RESULT_CODE);   
+        //}
         return "";
     }
     private String getDefaultDialer2 (){
