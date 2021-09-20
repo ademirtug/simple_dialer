@@ -106,7 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void readSettings() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool activateRecents = prefs.getBool("activateRecents") ?? false;
-
        
     if(!(await isDefaultDialer())){
       setState(() {

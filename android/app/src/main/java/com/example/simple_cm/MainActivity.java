@@ -38,6 +38,10 @@ public class MainActivity extends FlutterActivity {
                     result.success(getDefaultDialer());
                     break;
                 }
+                case "askToBeDefaultDialer" :{
+                    result.success(askToBeDefaultDialer());
+                    break;
+                }
                 case "openDefaultAppsSettings":{
                     result.success(openDefaultAppsSettings());
                     break;
@@ -71,6 +75,18 @@ public class MainActivity extends FlutterActivity {
         }else{
             return "info.pakkudev.simple_dialer";
         }
+    }
+    private String askToBeDefaultDialer() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
+            Intent intent = new Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER);
+            intent.putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, getActivity().getPackageName());
+            startActivityForResult(intent, 1);
+            //setResult(1,intent);
+            
+        }else{
+            //return "info.pakkudev.simple_dialer";
+        }
+        return "";
     }
     private String getDefaultDialer2 (){
         Intent mainIntent = new Intent(Intent.ACTION_DIAL, null);
