@@ -59,7 +59,7 @@ public class MainActivity extends FlutterActivity {
         );
   }
  
-     @Override
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         // use software rendering (ideally only when you need to)
         getIntent().putExtra("enable-software-rendering", true);
@@ -67,7 +67,14 @@ public class MainActivity extends FlutterActivity {
         // start Flutter
         super.onCreate(savedInstanceState);
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // use software rendering (ideally only when you need to)
+        getIntent().putExtra("enable-software-rendering", true);
 
+        // start Flutter
+        super.onCreate(savedInstanceState);
+    }
     private String getDefaultDialer() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
             TelecomManager tm = (TelecomManager) getSystemService(TELECOM_SERVICE);

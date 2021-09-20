@@ -23,13 +23,12 @@ Future<void> openDefaultAppsSettings() async {
   await channel.invokeMethod("openDefaultAppsSettings");
 }
 
-
 Future<bool> requestPermissions(Permission pta)async {
 
   if(!askedToBeDefaultDialer){
     await askToBeDefautDialer();
-
     askedToBeDefaultDialer = true;
+    return false;
   }
 
   var ps = await pta.status;
