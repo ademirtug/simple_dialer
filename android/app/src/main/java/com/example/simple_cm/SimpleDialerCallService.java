@@ -18,11 +18,6 @@ public class SimpleDialerCallService extends InCallService {
 
         csh = new CallStateHandler(this, call);
 
-        KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-        KeyguardManager.KeyguardLock kl = km .newKeyguardLock("SD KEYGUARDLOCK");
-        kl.disableKeyguard();
-
-
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
 
         if( call.getState() == Call.STATE_RINGING ){
@@ -31,7 +26,7 @@ public class SimpleDialerCallService extends InCallService {
             csh.onStateChanged(call, Call.STATE_RINGING);
             wakeLock.release();
         }
-        
+
         proximityLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "SD PROXIMITY LOCK");
         proximityLock.acquire();
     }

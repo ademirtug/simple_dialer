@@ -108,12 +108,14 @@ class _MyHomePageState extends State<MyHomePage> {
     bool activateRecents = prefs.getBool("activateRecents") ?? false;
        
     if(!(await isDefaultDialer())){
+
+
       setState(() {
         prefs.setBool("activateRecents", false);
         activateRecents = false;
       });
     }else{
-     
+    
     }
 
     _tabs.clear();

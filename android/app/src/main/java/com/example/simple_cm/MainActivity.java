@@ -11,6 +11,7 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
+import android.app.role.*;
 import android.content.*;
 import android.content.pm.*;
 import android.os.Build.*;
@@ -26,48 +27,50 @@ import java.util.*;
 public class MainActivity extends FlutterActivity {
     Collator coll = Collator.getInstance(Locale.getDefault());
     private static final String CHANNEL = "info.pakkudev.simple_dialer/channel";
+    MethodChannel.Result _result = null;
 
-  @Override
-  public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
-  super.configureFlutterEngine(flutterEngine);
-    new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
-        .setMethodCallHandler(
-          (call, result) -> {
-            switch(call.method){
-                case "getDefaultDialer": {
-                    result.success(getDefaultDialer());
-                    break;
+    @Override
+    public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
+        super.configureFlutterEngine(flutterEngine);
+        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
+            .setMethodCallHandler(
+                (call, result) -> {
+                    switch(call.method){
+                        case "getDefaultDialer": {
+                            result.success(getDefaultDialer());
+                            break;
+                        }
+                        case "askToBeDefaultDialer" :{
+                            _result = result;
+                            askToBeDefaultDialer();
+                            break;
+                        }
+                        case "openDefaultAppsSettings":{
+                            result.success(openDefaultAppsSettings());
+                            break;
+                        }
+                        default: {
+                            result.notImplemented();
+                            break;
+                        }
+                    }
                 }
-                case "askToBeDefaultDialer" :{
-                    result.success(askToBeDefaultDialer());
-                    break;
-                }
-                case "openDefaultAppsSettings":{
-                    result.success(openDefaultAppsSettings());
-                    break;
-                }
-                case "userConsent":{
-                    result.success(true);
-                    break;
-                }
-                default: {
-                    result.notImplemented();
-                    break;
-                }
-            }
-          }
-        );
-  }
+            );
+    }
  
      @Override
     public void onCreate(Bundle savedInstanceState) {
-        // use software rendering (ideally only when you need to)
         getIntent().putExtra("enable-software-rendering", true);
-
-        // start Flutter
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            _result.success(true);
+        }
+    }
     private String getDefaultDialer() {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
             TelecomManager tm = (TelecomManager) getSystemService(TELECOM_SERVICE);
@@ -76,17 +79,17 @@ public class MainActivity extends FlutterActivity {
             return "info.pakkudev.simple_dialer";
         }
     }
-    private String askToBeDefaultDialer() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
+    private void askToBeDefaultDialer() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q ){
+            RoleManager rm = (RoleManager) getSystemService(Context.ROLE_SERVICE);
+            startActivityForResult(rm.createRequestRoleIntent(RoleManager.ROLE_DIALER), 1);
+        }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ){
             Intent intent = new Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER);
             intent.putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, getActivity().getPackageName());
-            startActivityForResult(intent, 1);
-            //setResult(1,intent);
-            
+            startActivityForResult(intent, 1);          
         }else{
-            //return "info.pakkudev.simple_dialer";
+            setResult(1, null);
         }
-        return "";
     }
     private String getDefaultDialer2 (){
         Intent mainIntent = new Intent(Intent.ACTION_DIAL, null);
@@ -107,12 +110,4 @@ public class MainActivity extends FlutterActivity {
         }
         return true;
     }
-    // private boolean userConsent(){
-    //     if (getSystemService(TelecomManager::class.java).defaultDialerPackage != packageName) {
-    //         Intent(TelecomManager.ACTION_CHANGE_DEFAULT_DIALER)
-    //         .putExtra(TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME, packageName)
-    //         .let(::startActivity);
-    //     }
-    //     return true;
-    // }
 }

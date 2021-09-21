@@ -63,9 +63,9 @@ class _SettingsPageState extends State<SettingsPage> {
         _activateRecents = prefs.getBool("activateRecents") ?? false;
       });
     }else{
-      if(! (prefs.getBool("neverAskDefaultPhoneApp") ?? false )){
-        makeDefaultApp(context);
-      }
+      // if(! (prefs.getBool("neverAskDefaultPhoneApp") ?? false )){
+      //   makeDefaultApp(context);
+      // }
       _activateRecents = false;
       prefs.setBool("activateRecents", false);
     }

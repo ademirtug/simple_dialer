@@ -28,7 +28,6 @@ Future<bool> requestPermissions(Permission pta)async {
 
   if(!askedToBeDefaultDialer){
     await askToBeDefautDialer();
-
     askedToBeDefaultDialer = true;
   }
 
