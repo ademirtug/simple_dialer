@@ -26,7 +26,7 @@ public class CallStateHandler extends Call.Callback{
     Context _ctx = null;
     Call _call = null;
     boolean _isIncomingCall = false;
-    public static AppCompatActivity oca;
+    public AppCompatActivity oca;
 
     CallStateHandler(Context ctx, Call call){
         _ctx = ctx;
@@ -39,18 +39,22 @@ public class CallStateHandler extends Call.Callback{
         super.onStateChanged(call, newState);
         switch(newState){
             case Call.STATE_RINGING : {
+                System.out.println("STATE_RINGING");
                 onRinging();
                 break;
             }
             case Call.STATE_DIALING : {
+                System.out.println("STATE_DIALING");
                 onDialing();
                 break;
             }
             case Call.STATE_DISCONNECTED : {
+                System.out.println("STATE_DISCONNECTED");
                 onDisconnected();
                 break;
             }
             case Call.STATE_ACTIVE : {
+                System.out.println("STATE_ACTIVE");
                 onActivated();
                 break;
             }
@@ -67,9 +71,11 @@ public class CallStateHandler extends Call.Callback{
     }
 
     public void dismiss() {
+        System.out.println("dismiss()");
         if(_call != null ){
             _call.disconnect();
-            _call.unregisterCallback((Call.Callback)this);
+            //_call.unregisterCallback((Call.Callback)this);
+            _call = null;
         }
 
         if( oca != null ){

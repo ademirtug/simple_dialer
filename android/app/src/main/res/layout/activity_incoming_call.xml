@@ -72,7 +72,7 @@
             app:tint="#FFFFFF" />
 
         <ImageButton
-            android:id="@+id/reject"
+            android:id="@+id/dismiss"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"

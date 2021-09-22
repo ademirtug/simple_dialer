@@ -8,30 +8,53 @@ import android.app.ActivityManager.AppTask ;
 import android.os.Build.*;
 import android.os.*;
 import android.telecom.*;
+import android.app.KeyguardManager;
+import android.app.KeyguardManager.KeyguardLock;
+import android.content.*;
+
 
 public class OngoingCallActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        //     setShowWhenLocked(true);
+        //     setTurnScreenOn(true);
+        //     KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        //     keyguardManager.requestDismissKeyguard(this, null);
+        // }
+        // else{
+        //     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+        //             | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+        //             WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+        //             WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        // }
+
+        // KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        // KeyguardLock keyguard = km.newKeyguardLock("SD KEYGUARD LOCK");
+        // keyguard.disableKeyguard();
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
+
         setContentView(R.layout.activity_ongoing_call);
-        
-        
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-                | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-
+        System.out.println("OngoingCall::oca.finish()");
         if(SimpleDialerCallService.csh.oca != null )
             SimpleDialerCallService.csh.oca.finish();
 
         SimpleDialerCallService.csh.oca = this;
         
-        ImageButton rejectButton = (ImageButton) findViewById(R.id.reject);
-        rejectButton.setOnClickListener( new View.OnClickListener() {
+        ImageButton dismissButton = (ImageButton) findViewById(R.id.dismiss);
+        dismissButton.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
-                SimpleDialerCallService.csh.dismiss(); 
+                SimpleDialerCallService.csh.dismiss();
+                finish();
             }
         });
 
@@ -57,6 +80,7 @@ public class OngoingCallActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
+        System.out.println("OngoingCall::finish()");
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             super.finishAndRemoveTask();
         }
