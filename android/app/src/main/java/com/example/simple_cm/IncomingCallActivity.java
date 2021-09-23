@@ -18,24 +18,29 @@ public class IncomingCallActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //System.out.println("IncomingCallActivity");
 
-        // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        //     setShowWhenLocked(true);
-        //     setTurnScreenOn(true);
-        //     KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-        //     keyguardManager.requestDismissKeyguard(this, null);
-        // }
-        // else{
-        //     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-        //             | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
-        //             WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
-        //             WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        // }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //System.out.println("SetsCREENtURNoN");
+            setShowWhenLocked(true);
+            setTurnScreenOn(true);
+            KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+            keyguardManager.requestDismissKeyguard(this, null);
+            
+        }
+        
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
-                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
-                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        getWindow().addFlags(
+            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
+            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+            WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON);
+
+        
+
+
+
 
 
         setContentView(R.layout.activity_incoming_call);
@@ -49,7 +54,6 @@ public class IncomingCallActivity extends AppCompatActivity {
 
                 Intent ongoingCallScreen = new Intent(IncomingCallActivity.this, OngoingCallActivity.class);
                 startActivity(ongoingCallScreen);
-                //finish();
             }
         });
         
@@ -77,11 +81,13 @@ public class IncomingCallActivity extends AppCompatActivity {
             TextView callingNumber = (TextView)findViewById(R.id.callingNumber);
             callingNumber.setText(pn);    
         }
+
+        //System.out.println("INCOMING ACTIVITY ONCREATE END");
     }
 
     @Override
     public void finish() {
-        System.out.println("IncomingCall::finish()");
+        //System.out.println("IncomingCall::finish()");
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             super.finishAndRemoveTask();
         }

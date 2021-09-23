@@ -73,7 +73,7 @@ public class CallStateHandler extends Call.Callback{
     }
 
     public void dismiss() {
-        //System.out.println("dismiss()");
+        System.out.println("dismiss()");
         if(_call != null ){
             _call.disconnect();
             _call = null;
@@ -94,6 +94,7 @@ public class CallStateHandler extends Call.Callback{
        Intent incomingCallScreen = new Intent(_ctx, IncomingCallActivity.class);
        incomingCallScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
        _ctx.startActivity(incomingCallScreen);
+       //System.out.println("Activity fired Up");
     }
     public void onDialing(){
         Intent ongoingCallScreen = new Intent(_ctx, OngoingCallActivity.class);
