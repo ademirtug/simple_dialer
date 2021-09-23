@@ -16,11 +16,9 @@ public class SimpleDialerCallService extends InCallService {
     @Override
     public void onCallAdded(Call call) {
         super.onCallAdded(call);
-        
-        System.out.println("onCallAdded");
-
         csh = new CallStateHandler(this, call);
 
+        //System.out.println("onCallAdded");
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "SD WAKE LOCK");
         wakeLock.acquire();
@@ -29,20 +27,22 @@ public class SimpleDialerCallService extends InCallService {
         keyguard = km.newKeyguardLock("SD KEYGUARD LOCK");
         keyguard.disableKeyguard();
 
+        proximityLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "SD PROXIMITY LOCK");
+        proximityLock.acquire();
+        wakeLock.release();
+
+        
         if( call.getState() == Call.STATE_RINGING ){
             csh.onStateChanged(call, Call.STATE_RINGING);
         }
 
-        proximityLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "SD PROXIMITY LOCK");
-        proximityLock.acquire();
-        wakeLock.release();
-        System.out.println("onCallAdded Quits");
+       // System.out.println("onCallAdded Quits");
     }
 
     @Override
     public void onCallRemoved(Call call) {
         super.onCallRemoved(call);
-        System.out.println("onCallRemoved");
+        //System.out.println("onCallRemoved");
         
         if(csh!=null)
             csh.dismiss();

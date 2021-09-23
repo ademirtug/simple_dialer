@@ -26,7 +26,9 @@ public class CallStateHandler extends Call.Callback{
     Context _ctx = null;
     Call _call = null;
     boolean _isIncomingCall = false;
+    public AppCompatActivity ica;
     public AppCompatActivity oca;
+
 
     CallStateHandler(Context ctx, Call call){
         _ctx = ctx;
@@ -71,16 +73,19 @@ public class CallStateHandler extends Call.Callback{
     }
 
     public void dismiss() {
-        System.out.println("dismiss()");
+        //System.out.println("dismiss()");
         if(_call != null ){
             _call.disconnect();
-            //_call.unregisterCallback((Call.Callback)this);
             _call = null;
         }
 
         if( oca != null ){
             oca.finish();
             oca = null;
+        }
+        if(ica != null ){
+            ica.finish();
+            ica = null;
         }
     }
 

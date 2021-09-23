@@ -25,16 +25,6 @@ public class OngoingCallActivity extends AppCompatActivity {
         //     KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
         //     keyguardManager.requestDismissKeyguard(this, null);
         // }
-        // else{
-        //     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-        //             | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
-        //             WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
-        //             WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-        // }
-
-        // KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-        // KeyguardLock keyguard = km.newKeyguardLock("SD KEYGUARD LOCK");
-        // keyguard.disableKeyguard();
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
                 | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
@@ -44,10 +34,8 @@ public class OngoingCallActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_ongoing_call);
 
-        System.out.println("OngoingCall::oca.finish()");
-        if(SimpleDialerCallService.csh.oca != null )
-            SimpleDialerCallService.csh.oca.finish();
-
+        //System.out.println("OngoingCall::oca.finish()");
+        
         SimpleDialerCallService.csh.oca = this;
         
         ImageButton dismissButton = (ImageButton) findViewById(R.id.dismiss);
@@ -80,7 +68,12 @@ public class OngoingCallActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        System.out.println("OngoingCall::finish()");
+        //System.out.println("OngoingCall::finish()");
+        if(SimpleDialerCallService.csh.ica != null){
+            SimpleDialerCallService.csh.ica.finish();
+            SimpleDialerCallService.csh.ica = null;
+        }
+
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             super.finishAndRemoveTask();
         }

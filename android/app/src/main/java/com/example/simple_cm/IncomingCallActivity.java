@@ -41,7 +41,7 @@ public class IncomingCallActivity extends AppCompatActivity {
         setContentView(R.layout.activity_incoming_call);
                 
         ImageButton acceptButton = (ImageButton) findViewById(R.id.accept);
-        SimpleDialerCallService.csh.oca = this;
+        SimpleDialerCallService.csh.ica = this;
 
         acceptButton.setOnClickListener( new View.OnClickListener() {
             public void onClick(View v) {
