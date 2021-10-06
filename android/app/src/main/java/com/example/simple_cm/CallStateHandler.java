@@ -41,22 +41,22 @@ public class CallStateHandler extends Call.Callback{
         super.onStateChanged(call, newState);
         switch(newState){
             case Call.STATE_RINGING : {
-                System.out.println("STATE_RINGING");
+                //System.out.println("STATE_RINGING");
                 onRinging();
                 break;
             }
             case Call.STATE_DIALING : {
-                System.out.println("STATE_DIALING");
+               // System.out.println("STATE_DIALING");
                 onDialing();
                 break;
             }
             case Call.STATE_DISCONNECTED : {
-                System.out.println("STATE_DISCONNECTED");
+                //System.out.println("STATE_DISCONNECTED");
                 onDisconnected();
                 break;
             }
             case Call.STATE_ACTIVE : {
-                System.out.println("STATE_ACTIVE");
+                //System.out.println("STATE_ACTIVE");
                 onActivated();
                 break;
             }
@@ -73,7 +73,7 @@ public class CallStateHandler extends Call.Callback{
     }
 
     public void dismiss() {
-        System.out.println("dismiss()");
+        //System.out.println("dismiss()");
         if(_call != null ){
             _call.disconnect();
             _call = null;

@@ -19,23 +19,21 @@ public class OngoingCallActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        //     setShowWhenLocked(true);
-        //     setTurnScreenOn(true);
-        //     KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-        //     keyguardManager.requestDismissKeyguard(this, null);
-        // }
-
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true);
+            setTurnScreenOn(true);
+        }
+        else{
+            getWindow().addFlags(
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
-                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
-
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON 
+            );
+        }
 
         setContentView(R.layout.activity_ongoing_call);
-
-        //System.out.println("OngoingCall::oca.finish()");
-        
+       
         SimpleDialerCallService.csh.oca = this;
         
         ImageButton dismissButton = (ImageButton) findViewById(R.id.dismiss);
@@ -68,7 +66,6 @@ public class OngoingCallActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        //System.out.println("OngoingCall::finish()");
         if(SimpleDialerCallService.csh.ica != null){
             SimpleDialerCallService.csh.ica.finish();
             SimpleDialerCallService.csh.ica = null;

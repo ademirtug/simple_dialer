@@ -11,6 +11,9 @@
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:screenOrientation="portrait"
             android:hardwareAccelerated="true"
+            android:showOnLockScreen="true"
+            android:turnScreenOn="true"
+            
             android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
                  the Android process has started. This theme is visible to the user
@@ -62,14 +65,16 @@
             android:screenOrientation="portrait" 
             android:excludeFromRecents="true" 
             android:showOnLockScreen="true"
-            android:turnScreenOn="true"/>
+            android:turnScreenOn="true"
+            />
         <activity
             android:name=".OngoingCallActivity" 
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"  
             android:screenOrientation="portrait" 
             android:excludeFromRecents="true"
             android:showOnLockScreen="true"
-            android:turnScreenOn="true" />
+            android:turnScreenOn="true"
+            />
 
         <meta-data
             android:name="flutterEmbedding"

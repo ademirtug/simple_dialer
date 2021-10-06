@@ -27,23 +27,22 @@ public class SimpleDialerCallService extends InCallService {
         super.onCallAdded(call);
         csh = new CallStateHandler(this, call);
 
-        System.out.println("onCallAdded");
         PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "SD WAKE LOCK");
         wakeLock.acquire();
-
-        KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-        keyguard = km.newKeyguardLock("SD KEYGUARD LOCK");
-        keyguard.disableKeyguard();
+        wakeLock.release();
+        // KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        // keyguard = km.newKeyguardLock("SD KEYGUARD LOCK");
+        // keyguard.disableKeyguard();
 
         proximityLock = powerManager.newWakeLock(PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK, "SD PROXIMITY LOCK");
         proximityLock.acquire();
-        wakeLock.release();
-
-        
+       
         if( call.getState() == Call.STATE_RINGING ){
             csh.onStateChanged(call, Call.STATE_RINGING);
         }
+
+        
     }
 
     @Override
