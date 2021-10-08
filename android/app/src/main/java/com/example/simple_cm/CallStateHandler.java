@@ -10,17 +10,16 @@ import android.os.*;
 import android.telecom.*;
 import android.content.*;
 import android.telephony.PhoneNumberUtils; 
-import android.telecom.Call;
-import android.telecom.VideoProfile;
 import org.jetbrains.annotations.Nullable;
-import android.telecom.PhoneAccount;
 import android.telecom.PhoneAccount.Builder;
 import android.provider.*;
 import android.database.*;
-import android.content.Context;
 import android.net.Uri; 
+import android.graphics.*;
+import java.io.*;
+import android.content.res.*;
 
-
+import static java.lang.Long.parseLong;
 
 public class CallStateHandler extends Call.Callback{
     Context _ctx = null;
@@ -28,7 +27,7 @@ public class CallStateHandler extends Call.Callback{
     boolean _isIncomingCall = false;
     public AppCompatActivity ica;
     public AppCompatActivity oca;
-
+    Bitmap callerPhoto = null;
 
     CallStateHandler(Context ctx, Call call){
         _ctx = ctx;
@@ -87,6 +86,9 @@ public class CallStateHandler extends Call.Callback{
             ica.finish();
             ica = null;
         }
+        if(callerPhoto != null ){
+            callerPhoto = null;
+        }
     }
 
     public void onRinging(){
@@ -94,7 +96,6 @@ public class CallStateHandler extends Call.Callback{
        Intent incomingCallScreen = new Intent(_ctx, IncomingCallActivity.class);
        incomingCallScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
        _ctx.startActivity(incomingCallScreen);
-       //System.out.println("Activity fired Up");
     }
     public void onDialing(){
         Intent ongoingCallScreen = new Intent(_ctx, OngoingCallActivity.class);
@@ -115,9 +116,33 @@ public class CallStateHandler extends Call.Callback{
         return _call.getDetails().getContactDisplayName();
     }
     public String getCallPhoneNumber(){
-        return PhoneNumberUtils.formatNumber(_call.getDetails().getHandle().toString().replaceAll("tel:", "")).replaceAll("%2B", "+");
+        return _call.getDetails().getHandle().toString().replaceAll("tel:", "").replaceAll("%2B", "+");
     }
-        public String getCallerDisplayName(ContentResolver cr){
+    public String getCallerId(){
+        return getContactId(getCallPhoneNumber());
+    }
+    private String getContactId(String number) {
+        System.out.println("number: " + number );
+        
+        String[] projection = new String[]{Contacts.Phones.PERSON_ID};
+        Uri contactUri = Uri.withAppendedPath(Contacts.Phones.CONTENT_FILTER_URL,
+            Uri.encode(number));
+        Cursor c = _ctx.getContentResolver().query(contactUri, projection,
+            null, null, null);
+        if (c.moveToFirst()) {
+            String contactId=c.getString(c.getColumnIndex(Contacts.Phones.PERSON_ID));
+            System.out.println("contactID: " + contactId );
+            return contactId;
+        }
+        return "";
+    }
+    public Bitmap getCallerPhoto(){
+        if( SimpleDialerCallService.csh.callerPhoto == null )
+            SimpleDialerCallService.csh.callerPhoto = loadContactPhoto(parseLong(SimpleDialerCallService.csh.getCallerId()));
+
+        return SimpleDialerCallService.csh.callerPhoto;
+    }
+    public String getCallerDisplayName(ContentResolver cr){
         String tel = getCallPhoneNumber();
         Uri uri=Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,tel);
 
@@ -134,4 +159,15 @@ public class CallStateHandler extends Call.Callback{
         }
         return contactName.isEmpty() ? tel : contactName;
     }
+    public Bitmap loadContactPhoto(long id)
+    {
+        Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, id);
+        InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(_ctx.getContentResolver(), uri, true);
+        if (input == null) {
+            return null;
+        }
+
+        return BitmapFactory.decodeStream(input);
+    }
+
 }

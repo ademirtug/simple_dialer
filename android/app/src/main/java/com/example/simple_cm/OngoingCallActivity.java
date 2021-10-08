@@ -62,6 +62,11 @@ public class OngoingCallActivity extends AppCompatActivity {
             TextView callingNumber = (TextView)findViewById(R.id.callingNumber);
             callingNumber.setText(pn);    
         }
+
+        ImageView iv = findViewById(R.id.imageView);
+        if(SimpleDialerCallService.csh.getCallerPhoto() != null){
+            iv.setImageBitmap(SimpleDialerCallService.csh.getCallerPhoto());
+        }
     }
 
     @Override

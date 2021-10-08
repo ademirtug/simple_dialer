@@ -12,6 +12,8 @@ import android.content.*;
 import android.app.KeyguardManager;
 import android.app.KeyguardManager.KeyguardLock;
 import android.content.*;
+import android.graphics.*;
+import java.io.*;
 
 public class IncomingCallActivity extends AppCompatActivity {
 
@@ -74,6 +76,11 @@ public class IncomingCallActivity extends AppCompatActivity {
             callingNumber.setText(pn);    
         }
 
+        ImageView iv = findViewById(R.id.imageView);
+        if(SimpleDialerCallService.csh.getCallerPhoto() != null){
+            iv.setImageBitmap(SimpleDialerCallService.csh.getCallerPhoto());
+        }
+
         //System.out.println("INCOMING ACTIVITY ONCREATE END");
     }
 
@@ -87,4 +94,5 @@ public class IncomingCallActivity extends AppCompatActivity {
             super.finish();
         }
     }
+
 }
