@@ -55,6 +55,12 @@ class _SettingsPageState extends State<SettingsPage> {
             SwitchListTile(
               value: _autoAcceptCalls, 
               onChanged: (v)async {
+                if( v == true ){
+                  if(!(await isDefaultDialer())){
+                    defaultAppPermissionNeeded(context);
+                    return;
+                  }
+                }
                 var info = await deviceInfoPlugin.androidInfo;
                 if(info.version.sdkInt! < 23 ){
                   showDialog<void>(
@@ -99,6 +105,12 @@ class _SettingsPageState extends State<SettingsPage> {
             SwitchListTile(
               value: _autoSwitchLoudspeaker, 
               onChanged: (v)async {
+                if( v == true ){
+                  if(!(await isDefaultDialer())){
+                    defaultAppPermissionNeeded(context);
+                    return;
+                  }
+                }
                 var info = await deviceInfoPlugin.androidInfo;
                 if(info.version.sdkInt! < 23 ){
                   showDialog<void>(
