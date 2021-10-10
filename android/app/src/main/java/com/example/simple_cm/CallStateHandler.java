@@ -170,7 +170,7 @@ public class CallStateHandler extends Call.Callback{
     }
     public SensorManager getSensorManager(){
         if( sensorManager == null )
-            sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+            sensorManager = (SensorManager) _ctx.getSystemService(Context.SENSOR_SERVICE);
 
         return sensorManager;
     }

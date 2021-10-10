@@ -14,6 +14,7 @@ import android.app.KeyguardManager.KeyguardLock;
 import android.content.*;
 
 
+
 import android.hardware.*;
 import android.media.*;
 import android.Manifest;
@@ -79,20 +80,32 @@ public class OngoingCallActivity extends AppCompatActivity implements SensorEven
         //PROXIMITY LOUD SPEAKER
         SharedPreferences preferences = getSharedPreferences("FlutterSharedPreferences", MODE_PRIVATE);
         SimpleDialerCallService.csh.autoSwitchLoudspeaker = preferences.getBoolean("flutter.autoSwitchLoudspeaker", false);
-        
+
+        // if (checkSelfPermission(Manifest.permission.MODIFY_AUDIO_SETTINGS) != 0) {
+        //     requestPermissions(new String[]{Manifest.permission.MODIFY_AUDIO_SETTINGS},200);
+        //     System.out.println("NO PERM");
+        // // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+        // // app-defined int constant
+
+
+        // }
+        // else{
+        //     System.out.println("PERM EXISTS");
+        // }
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getApplicationContext().getSensorManager().registerListener(this, SimpleDialerCallService.csh.getProximitySensor()
+        SimpleDialerCallService.csh.getSensorManager().registerListener(this, SimpleDialerCallService.csh.getProximitySensor()
         , SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        getApplicationContext().getSensorManager().unregisterListener(this);
+        SimpleDialerCallService.csh.getSensorManager().unregisterListener(this);
     }
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -103,11 +116,11 @@ public class OngoingCallActivity extends AppCompatActivity implements SensorEven
             if (event.values[0] >= -SimpleDialerCallService.csh.SENSOR_SENSITIVITY 
                 && event.values[0] <= SimpleDialerCallService.csh.SENSOR_SENSITIVITY) {
                 //near
-                Toast.makeText(getApplicationContext(), "near", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "near", Toast.LENGTH_SHORT).show();
                 switchLoudspeaker(false);
             } else {
                 //far
-                Toast.makeText(getApplicationContext(), "far", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "far", Toast.LENGTH_SHORT).show();
                 switchLoudspeaker(true);
             }
         }
@@ -131,6 +144,12 @@ public class OngoingCallActivity extends AppCompatActivity implements SensorEven
             SimpleDialerCallService.csh.ica = null;
         }
 
+        if( am != null ){
+            
+            am.setSpeakerphoneOn(false);
+            am.setMode(AudioManager.MODE_NORMAL);
+            am = null;
+        }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             super.finishAndRemoveTask();
         }
