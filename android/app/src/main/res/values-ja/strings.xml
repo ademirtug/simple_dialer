@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">ダイヤラ</string>
     <string name="makingCall">発信中...</string>
     <string name="incomingCall">通話着信</string>
 </resources>

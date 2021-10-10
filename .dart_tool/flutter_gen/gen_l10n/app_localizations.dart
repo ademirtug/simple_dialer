@@ -172,6 +172,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Never ask again.'**
   String get neverAsk;
+
+  /// No description provided for @proximityAccept.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto accept calls'**
+  String get proximityAccept;
+
+  /// No description provided for @proximityAcceptDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow proximity sensor to automatically accept calls when it detects an object(like user\'s ears)'**
+  String get proximityAcceptDescription;
+
+  /// No description provided for @proximityLoudspeaker.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto switch loudspeaker'**
+  String get proximityLoudspeaker;
+
+  /// No description provided for @proximityLoudspeakerDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user\'s ears)'**
+  String get proximityLoudspeakerDescription;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

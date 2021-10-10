@@ -238,6 +238,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.3"
+  proximity_sensor:
+    dependency: "direct main"
+    description:
+      name: proximity_sensor
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   quiver:
     dependency: transitive
     description:

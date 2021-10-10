@@ -13,7 +13,9 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   bool _activateRecents = false;
-  bool _isChecked = false;
+  bool _autoAcceptCalls = false;
+  bool _autoSwitchLoudspeaker = false;
+
 
   _SettingsPageState() {
     readValues();
@@ -48,7 +50,36 @@ class _SettingsPageState extends State<SettingsPage> {
               },
               title: Text(AppLocalizations.of(context)!.activateRecents)
             ),
+            SwitchListTile(
+              value: _autoAcceptCalls, 
+              onChanged: (v)async {
 
+                setState(() {
+                  _autoAcceptCalls = v;
+                });
+
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.setBool("autoAcceptCalls", v);
+
+              },
+              title: Text(AppLocalizations.of(context)!.proximityAccept),
+              subtitle: Text(AppLocalizations.of(context)!.proximityAcceptDescription),
+            ),
+            SwitchListTile(
+              value: _autoSwitchLoudspeaker, 
+              onChanged: (v)async {
+
+                setState(() {
+                  _autoSwitchLoudspeaker = v;
+                });
+
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.setBool("autoSwitchLoudspeaker", v);
+
+              },
+              title: Text(AppLocalizations.of(context)!.proximityLoudspeaker),
+              subtitle: Text(AppLocalizations.of(context)!.proximityLoudspeakerDescription),
+            ),
           ],
         )
       )
@@ -69,6 +100,8 @@ class _SettingsPageState extends State<SettingsPage> {
       _activateRecents = false;
       prefs.setBool("activateRecents", false);
     }
+    _autoAcceptCalls = prefs.getBool("autoAcceptCalls") ?? false;
+    _autoSwitchLoudspeaker = prefs.getBool("autoSwitchLoudspeaker") ?? false;
   }
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{

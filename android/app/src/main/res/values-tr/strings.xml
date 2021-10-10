@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Çevirici</string>
     <string name="makingCall">Aranıyor...</string>
     <string name="incomingCall">Gelen Arama</string>
 </resources>

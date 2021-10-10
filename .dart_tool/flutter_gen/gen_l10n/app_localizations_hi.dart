@@ -42,4 +42,16 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get neverAsk => 'फिर कभी मत पूछो';
+
+  @override
+  String get proximityAccept => 'Auto accept calls';
+
+  @override
+  String get proximityAcceptDescription => 'Allow proximity sensor to automatically accept calls when it detects an object(like user\'s ears)';
+
+  @override
+  String get proximityLoudspeaker => 'Auto switch loudspeaker';
+
+  @override
+  String get proximityLoudspeakerDescription => 'Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user\'s ears)';
 }

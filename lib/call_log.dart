@@ -89,7 +89,7 @@ class _CallLogTileSheetState extends State<CallLogTile> {
     String? vn = widget.cle.name != null ? widget.cle.name : widget.cle.simDisplayName;
     vn = vn == null ? widget.cle.number : vn;
     DateTime ct = DateTime.fromMillisecondsSinceEpoch(widget.cle.timestamp ?? 0);
-    var x = timeago.format(ct, locale: "${window.locale.languageCode}"/*_${window.locale.countryCode}"*/);
+    var x = timeago.format(ct, locale: "${window.locale.languageCode}");
     return ListTile(
       contentPadding: EdgeInsets.only( left: 3),
       leading: CircleAvatar(
@@ -104,8 +104,9 @@ class _CallLogTileSheetState extends State<CallLogTile> {
           child: InkWell(
               splashColor: Colors.grey, // Splash color
               onTap: ()async{
-                if( await requestPermissions(Permission.phone) == false )
+                if( await requestPermissions(Permission.phone) == false || await requestPermissions(Permission.contacts) == false)
                   return;
+                  
                 await FlutterPhoneDirectCaller.callNumber(widget.cle.number ?? "");              
               },
               child: SizedBox(width: 56, height: 56, child: Icon(Icons.phone, size: 48)),

@@ -14,8 +14,11 @@ import android.app.KeyguardManager.KeyguardLock;
 import android.content.*;
 import android.graphics.*;
 import java.io.*;
+import android.hardware.*;
+import android.media.*;
 
-public class IncomingCallActivity extends AppCompatActivity {
+public class IncomingCallActivity extends AppCompatActivity implements SensorEventListener{
+    boolean screenVisible = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +45,10 @@ public class IncomingCallActivity extends AppCompatActivity {
         ImageButton acceptButton = (ImageButton) findViewById(R.id.accept);
         SimpleDialerCallService.csh.ica = this;
 
-        acceptButton.setOnClickListener( new View.OnClickListener() {
+        acceptButton.setOnClickListener( 
+            new View.OnClickListener() {
             public void onClick(View v) {
-                SimpleDialerCallService.csh.answer();
-
-                Intent ongoingCallScreen = new Intent(IncomingCallActivity.this, OngoingCallActivity.class);
-                startActivity(ongoingCallScreen);
+                acceptCall();
             }
         });
         
@@ -81,9 +82,51 @@ public class IncomingCallActivity extends AppCompatActivity {
             iv.setImageBitmap(SimpleDialerCallService.csh.getCallerPhoto());
         }
 
-        //System.out.println("INCOMING ACTIVITY ONCREATE END");
+        //PROXIMITY AUTO ACCEPT
+        SharedPreferences preferences = getSharedPreferences("FlutterSharedPreferences", MODE_PRIVATE);
+        SimpleDialerCallService.csh.autoAcceptCalls = preferences.getBoolean("flutter.autoAcceptCalls", false);
     }
 
+    public void acceptCall(){
+        SimpleDialerCallService.csh.answer();
+
+        Intent ongoingCallScreen = new Intent(IncomingCallActivity.this, OngoingCallActivity.class);
+        startActivity(ongoingCallScreen);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SimpleDialerCallService.csh.getSensorManager().registerListener(this, SimpleDialerCallService.csh.getProximitySensor()
+        , SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SimpleDialerCallService.csh.getSensorManager().unregisterListener(this);
+    }
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if(!SimpleDialerCallService.csh.autoAcceptCalls)
+            return;
+
+        if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+            if (event.values[0] >= -SimpleDialerCallService.csh.SENSOR_SENSITIVITY 
+                && event.values[0] <= SimpleDialerCallService.csh.SENSOR_SENSITIVITY) {
+                if(screenVisible)
+                    acceptCall();
+            } else {
+                screenVisible = true;
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
     @Override
     public void finish() {
         //System.out.println("IncomingCall::finish()");

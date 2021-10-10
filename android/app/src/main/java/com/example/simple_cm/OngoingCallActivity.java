@@ -1,5 +1,6 @@
 package info.pakkudev.simple_dialer;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.view.*;
 import android.widget.*;
@@ -13,7 +14,14 @@ import android.app.KeyguardManager.KeyguardLock;
 import android.content.*;
 
 
-public class OngoingCallActivity extends AppCompatActivity {
+import android.hardware.*;
+import android.media.*;
+import android.Manifest;
+
+public class OngoingCallActivity extends AppCompatActivity implements SensorEventListener{
+
+
+    AudioManager am = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +75,55 @@ public class OngoingCallActivity extends AppCompatActivity {
         if(SimpleDialerCallService.csh.getCallerPhoto() != null){
             iv.setImageBitmap(SimpleDialerCallService.csh.getCallerPhoto());
         }
+             
+        //PROXIMITY LOUD SPEAKER
+        SharedPreferences preferences = getSharedPreferences("FlutterSharedPreferences", MODE_PRIVATE);
+        SimpleDialerCallService.csh.autoSwitchLoudspeaker = preferences.getBoolean("flutter.autoSwitchLoudspeaker", false);
+        
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getApplicationContext().getSensorManager().registerListener(this, SimpleDialerCallService.csh.getProximitySensor()
+        , SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        getApplicationContext().getSensorManager().unregisterListener(this);
+    }
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if(!SimpleDialerCallService.csh.autoSwitchLoudspeaker)
+            return;
+
+        if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
+            if (event.values[0] >= -SimpleDialerCallService.csh.SENSOR_SENSITIVITY 
+                && event.values[0] <= SimpleDialerCallService.csh.SENSOR_SENSITIVITY) {
+                //near
+                Toast.makeText(getApplicationContext(), "near", Toast.LENGTH_SHORT).show();
+                switchLoudspeaker(false);
+            } else {
+                //far
+                Toast.makeText(getApplicationContext(), "far", Toast.LENGTH_SHORT).show();
+                switchLoudspeaker(true);
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+    public void switchLoudspeaker(boolean status){
+        if(am == null)
+            am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+
+        am.setMode(AudioManager.MODE_IN_COMMUNICATION);
+        am.setSpeakerphoneOn(status);
+    }
     @Override
     public void finish() {
         if(SimpleDialerCallService.csh.ica != null){

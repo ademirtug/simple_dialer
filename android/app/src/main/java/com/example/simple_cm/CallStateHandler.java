@@ -18,16 +18,24 @@ import android.net.Uri;
 import android.graphics.*;
 import java.io.*;
 import android.content.res.*;
+import android.hardware.*;
+
 
 import static java.lang.Long.parseLong;
 
 public class CallStateHandler extends Call.Callback{
-    Context _ctx = null;
-    Call _call = null;
-    boolean _isIncomingCall = false;
+    public Context _ctx = null;
     public AppCompatActivity ica;
     public AppCompatActivity oca;
+
+    Call _call = null;
+    boolean _isIncomingCall = false;
     Bitmap callerPhoto = null;
+    boolean autoSwitchLoudspeaker = false;
+    boolean autoAcceptCalls = false;
+    SensorManager sensorManager = null;
+    Sensor proximitySensor = null;
+    int SENSOR_SENSITIVITY = 4;
 
     CallStateHandler(Context ctx, Call call){
         _ctx = ctx;
@@ -86,9 +94,7 @@ public class CallStateHandler extends Call.Callback{
             ica.finish();
             ica = null;
         }
-        if(callerPhoto != null ){
-            callerPhoto = null;
-        }
+        callerPhoto = null;
     }
 
     public void onRinging(){
@@ -121,20 +127,13 @@ public class CallStateHandler extends Call.Callback{
     public String getCallerId(){
         return getContactId(getCallPhoneNumber());
     }
-    private String getContactId(String number) {
-        System.out.println("number: " + number );
-        
-        String[] projection = new String[]{Contacts.Phones.PERSON_ID};
-        Uri contactUri = Uri.withAppendedPath(Contacts.Phones.CONTENT_FILTER_URL,
-            Uri.encode(number));
-        Cursor c = _ctx.getContentResolver().query(contactUri, projection,
-            null, null, null);
+    private String getContactId(String number) {     
+        Uri contactUri = Uri.withAppendedPath(Contacts.Phones.CONTENT_FILTER_URL, Uri.encode(number));
+        Cursor c = _ctx.getContentResolver().query(contactUri, new String[]{Contacts.Phones.PERSON_ID}, null, null, null);
         if (c.moveToFirst()) {
-            String contactId=c.getString(c.getColumnIndex(Contacts.Phones.PERSON_ID));
-            System.out.println("contactID: " + contactId );
-            return contactId;
+            return c.getString(c.getColumnIndex(Contacts.Phones.PERSON_ID));
         }
-        return "";
+        return "0";
     }
     public Bitmap getCallerPhoto(){
         if( SimpleDialerCallService.csh.callerPhoto == null )
@@ -166,8 +165,20 @@ public class CallStateHandler extends Call.Callback{
         if (input == null) {
             return null;
         }
-
+        //input.close();
         return BitmapFactory.decodeStream(input);
+    }
+    public SensorManager getSensorManager(){
+        if( sensorManager == null )
+            sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+        return sensorManager;
+    }
+    public Sensor getProximitySensor(){
+        if( proximitySensor == null ){
+            proximitySensor = getSensorManager().getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        }
+        return proximitySensor;
     }
 
 }
