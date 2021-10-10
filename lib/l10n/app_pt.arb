@@ -10,5 +10,10 @@
     "setAsDefaultPhoneApp":"Definir como aplicativo de Telefone padrão", 
     "makeDefault" : "Tornar Padrão",
     "makeDefaultMessage" : "Gostaria de definir 'Discador simples' como seu aplicativo de Telefone padrão?",
-    "neverAsk" : "Nunca pergunte de novo."
+    "neverAsk" : "Nunca pergunte de novo.",
+    "proximityAccept" : "Aceitar chamadas automaticamente",
+    "proximityAcceptDescription" : "Permite que o sensor de proximidade aceite chamadas automaticamente ao detectar um objeto (como os ouvidos do usuário).",
+    "proximityLoudspeaker" : "Auto-ativar alto-falante",
+    "proximityLoudspeakerDescription" : "Permita que o sensor de proximidade mude automaticamente para o alto-falante quando não houver nenhum objeto nas proximidades (como os ouvidos do usuário).",
+    "android6+Requirement" : "Esta opção requer Android 6.0 ou versões mais recentes."
 }

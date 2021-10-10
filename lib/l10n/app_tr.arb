@@ -10,5 +10,10 @@
     "setAsDefaultPhoneApp":"Varsayılan Telefon uygulaması olarak ayarla", 
     "makeDefault" : "Varsayılan Yap",
     "makeDefaultMessage" : "'Simple Dialer' uygulamasını varsayılan Telefon uygulamanız yapmak ister misiniz?",
-    "neverAsk" : "Tekrar sorma."
+    "neverAsk" : "Tekrar sorma.",
+    "proximityAccept" : "Gelen aramaları otomatik kabul et",
+    "proximityAcceptDescription" : "Yakınlık sensörünün bir nesne (kullanıcının kulakları gibi) algıladığında aramaları otomatik olarak kabul etmesine izin verin.",
+    "proximityLoudspeaker" : "Hoparlörü otomatik etkinleştir",
+    "proximityLoudspeakerDescription" : "Yakınlık sensörünün yakınlarda herhangi bir nesne olmadığında (kullanıcının kulakları gibi) otomatik olarak hoparlöre geçmesine izin verin.",
+    "android6+Requirement" : "Bu seçenek, Android 6.0 veya daha yeni sürümleri gerektirir."
 }

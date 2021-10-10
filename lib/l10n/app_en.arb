@@ -12,7 +12,8 @@
     "makeDefaultMessage" : "Would you like to set 'Simple Dialer' as your default Phone app?",
     "neverAsk" : "Never ask again.",
     "proximityAccept" : "Auto accept calls",
-    "proximityAcceptDescription" : "Allow proximity sensor to automatically accept calls when it detects an object(like user's ears)",
-    "proximityLoudspeaker" : "Auto switch loudspeaker",
-    "proximityLoudspeakerDescription" : "Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user's ears)"
+    "proximityAcceptDescription" : "Allow proximity sensor to automatically accept calls when it detects an object(like user's ears).",
+    "proximityLoudspeaker" : "Auto activate loudspeaker",
+    "proximityLoudspeakerDescription" : "Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user's ears).",
+    "android6+Requirement" : "This option requires Android 6.0 or newer versions."
 }
