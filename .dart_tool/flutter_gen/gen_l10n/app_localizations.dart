@@ -10,6 +10,7 @@ import 'app_localizations_en.dart';
 import 'app_localizations_hi.dart';
 import 'app_localizations_ja.dart';
 import 'app_localizations_pt.dart';
+import 'app_localizations_ru.dart';
 import 'app_localizations_tr.dart';
 
 /// Callers can lookup localized strings with an instance of AppLocalizations returned
@@ -98,6 +99,7 @@ abstract class AppLocalizations {
     Locale('ja'),
     Locale('pt'),
     Locale('pt', 'BR'),
+    Locale('ru'),
     Locale('tr')
   ];
 
@@ -182,20 +184,38 @@ abstract class AppLocalizations {
   /// No description provided for @proximityAcceptDescription.
   ///
   /// In en, this message translates to:
-  /// **'Allow proximity sensor to automatically accept calls when it detects an object(like user\'s ears)'**
+  /// **'Allow proximity sensor to automatically accept calls when it detects an object(like user\'s ears).'**
   String get proximityAcceptDescription;
 
   /// No description provided for @proximityLoudspeaker.
   ///
   /// In en, this message translates to:
-  /// **'Auto switch loudspeaker'**
+  /// **'Auto activate loudspeaker'**
   String get proximityLoudspeaker;
 
   /// No description provided for @proximityLoudspeakerDescription.
   ///
   /// In en, this message translates to:
-  /// **'Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user\'s ears)'**
+  /// **'Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user\'s ears).'**
   String get proximityLoudspeakerDescription;
+
+  /// No description provided for @systemRequirements.
+  ///
+  /// In en, this message translates to:
+  /// **'System Requirements'**
+  String get systemRequirements;
+
+  /// No description provided for @android6RequirementDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This option requires Android 6.0 or newer versions.'**
+  String get android6RequirementDescription;
+
+  /// No description provided for @okay.
+  ///
+  /// In en, this message translates to:
+  /// **'Ok'**
+  String get okay;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -207,7 +227,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'hi', 'ja', 'pt', 'tr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'hi', 'ja', 'pt', 'ru', 'tr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -231,6 +251,7 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
     case 'hi': return AppLocalizationsHi();
     case 'ja': return AppLocalizationsJa();
     case 'pt': return AppLocalizationsPt();
+    case 'ru': return AppLocalizationsRu();
     case 'tr': return AppLocalizationsTr();
   }
 

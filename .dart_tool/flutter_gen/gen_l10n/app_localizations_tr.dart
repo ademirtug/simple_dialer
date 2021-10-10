@@ -44,14 +44,23 @@ class AppLocalizationsTr extends AppLocalizations {
   String get neverAsk => 'Tekrar sorma.';
 
   @override
-  String get proximityAccept => 'Auto accept calls';
+  String get proximityAccept => 'Gelen aramaları otomatik kabul et';
 
   @override
-  String get proximityAcceptDescription => 'Allow proximity sensor to automatically accept calls when it detects an object(like user\'s ears)';
+  String get proximityAcceptDescription => 'Yakınlık sensörünün bir nesne (kullanıcının kulakları gibi) algıladığında aramaları otomatik olarak kabul etmesine izin verin.';
 
   @override
-  String get proximityLoudspeaker => 'Auto switch loudspeaker';
+  String get proximityLoudspeaker => 'Hoparlörü otomatik etkinleştir';
 
   @override
-  String get proximityLoudspeakerDescription => 'Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user\'s ears)';
+  String get proximityLoudspeakerDescription => 'Yakınlık sensörünün yakınlarda herhangi bir nesne olmadığında (kullanıcının kulakları gibi) otomatik olarak hoparlöre geçmesine izin verin.';
+
+  @override
+  String get systemRequirements => 'Sistem Gereksinimleri';
+
+  @override
+  String get android6RequirementDescription => 'Bu seçenek, Android 6.0 veya daha yeni sürümleri gerektirir.';
+
+  @override
+  String get okay => 'Tamam';
 }

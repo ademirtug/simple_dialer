@@ -15,5 +15,7 @@
     "proximityAcceptDescription" : "近接センサーがオブジェクト（ユーザーの耳など）を検出すると、呼び出しを自動的に受け入れるようにします。",
     "proximityLoudspeaker" : "スピーカーの自動起動",
     "proximityLoudspeakerDescription" : "近くに物体がない場合（ユーザーの耳など）、近接センサーが自動的にスピーカーに切り替わるようにします",
-    "android6+Requirement" : "このオプションには、Android6.0以降のバージョンが必要です。"
+    "systemRequirements" : "システム要求",
+    "android6RequirementDescription" : "このオプションには、Android6.0以降のバージョンが必要です。",
+    "okay" : "わかった"
 }

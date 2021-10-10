@@ -47,11 +47,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get proximityAccept => 'Auto accept calls';
 
   @override
-  String get proximityAcceptDescription => 'Allow proximity sensor to automatically accept calls when it detects an object(like user\'s ears)';
+  String get proximityAcceptDescription => 'Allow proximity sensor to automatically accept calls when it detects an object(like user\'s ears).';
 
   @override
-  String get proximityLoudspeaker => 'Auto switch loudspeaker';
+  String get proximityLoudspeaker => 'Auto activate loudspeaker';
 
   @override
-  String get proximityLoudspeakerDescription => 'Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user\'s ears)';
+  String get proximityLoudspeakerDescription => 'Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user\'s ears).';
+
+  @override
+  String get systemRequirements => 'System Requirements';
+
+  @override
+  String get android6RequirementDescription => 'This option requires Android 6.0 or newer versions.';
+
+  @override
+  String get okay => 'Ok';
 }

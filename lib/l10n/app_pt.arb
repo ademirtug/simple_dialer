@@ -15,5 +15,7 @@
     "proximityAcceptDescription" : "Permite que o sensor de proximidade aceite chamadas automaticamente ao detectar um objeto (como os ouvidos do usuário).",
     "proximityLoudspeaker" : "Auto-ativar alto-falante",
     "proximityLoudspeakerDescription" : "Permita que o sensor de proximidade mude automaticamente para o alto-falante quando não houver nenhum objeto nas proximidades (como os ouvidos do usuário).",
-    "android6+Requirement" : "Esta opção requer Android 6.0 ou versões mais recentes."
+    "systemRequirements" : "Requisitos de sistema",
+    "android6RequirementDescription" : "Esta opção requer Android 6.0 ou versões mais recentes.",
+    "okay" : "Está bem"
 }

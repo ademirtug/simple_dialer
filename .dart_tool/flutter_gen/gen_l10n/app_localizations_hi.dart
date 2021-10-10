@@ -44,14 +44,23 @@ class AppLocalizationsHi extends AppLocalizations {
   String get neverAsk => 'फिर कभी मत पूछो';
 
   @override
-  String get proximityAccept => 'Auto accept calls';
+  String get proximityAccept => 'ऑटो कॉल स्वीकार करें';
 
   @override
-  String get proximityAcceptDescription => 'Allow proximity sensor to automatically accept calls when it detects an object(like user\'s ears)';
+  String get proximityAcceptDescription => 'निकटता सेंसर को किसी वस्तु (जैसे उपयोगकर्ता के कान) का पता चलने पर कॉल को स्वचालित रूप से स्वीकार करने की अनुमति दें।';
 
   @override
-  String get proximityLoudspeaker => 'Auto switch loudspeaker';
+  String get proximityLoudspeaker => 'ऑटो सक्रिय लाउडस्पीकर';
 
   @override
-  String get proximityLoudspeakerDescription => 'Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user\'s ears)';
+  String get proximityLoudspeakerDescription => 'निकटता सेंसर को स्वचालित रूप से लाउडस्पीकर पर स्विच करने की अनुमति दें जब आस-पास कोई वस्तु न हो (जैसे उपयोगकर्ता के कान)।';
+
+  @override
+  String get systemRequirements => 'सिस्टम आवश्यकताएं';
+
+  @override
+  String get android6RequirementDescription => 'इस विकल्प के लिए Android 6.0 या नए संस्करणों की आवश्यकता है।';
+
+  @override
+  String get okay => 'ठीक';
 }

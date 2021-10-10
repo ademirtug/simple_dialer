@@ -44,14 +44,23 @@ class AppLocalizationsJa extends AppLocalizations {
   String get neverAsk => '二度と聞かない';
 
   @override
-  String get proximityAccept => 'Auto accept calls';
+  String get proximityAccept => '通話を自動的に受け入れる';
 
   @override
-  String get proximityAcceptDescription => 'Allow proximity sensor to automatically accept calls when it detects an object(like user\'s ears)';
+  String get proximityAcceptDescription => '近接センサーがオブジェクト（ユーザーの耳など）を検出すると、呼び出しを自動的に受け入れるようにします。';
 
   @override
-  String get proximityLoudspeaker => 'Auto switch loudspeaker';
+  String get proximityLoudspeaker => 'スピーカーの自動起動';
 
   @override
-  String get proximityLoudspeakerDescription => 'Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user\'s ears)';
+  String get proximityLoudspeakerDescription => '近くに物体がない場合（ユーザーの耳など）、近接センサーが自動的にスピーカーに切り替わるようにします';
+
+  @override
+  String get systemRequirements => 'システム要求';
+
+  @override
+  String get android6RequirementDescription => 'このオプションには、Android6.0以降のバージョンが必要です。';
+
+  @override
+  String get okay => 'わかった';
 }

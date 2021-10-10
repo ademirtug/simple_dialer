@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'dart:io';
 import 'util.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -15,6 +17,7 @@ class _SettingsPageState extends State<SettingsPage> {
   bool _activateRecents = false;
   bool _autoAcceptCalls = false;
   bool _autoSwitchLoudspeaker = false;
+  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
 
   _SettingsPageState() {
@@ -39,7 +42,6 @@ class _SettingsPageState extends State<SettingsPage> {
                     return;
                   }
                 }
-
                 setState(() {
                   _activateRecents = v;
                 });
@@ -53,6 +55,35 @@ class _SettingsPageState extends State<SettingsPage> {
             SwitchListTile(
               value: _autoAcceptCalls, 
               onChanged: (v)async {
+                var info = await deviceInfoPlugin.androidInfo;
+                if(info.version.sdkInt! < 23 ){
+                  showDialog<void>(
+                    context: context,
+                    barrierDismissible: false, 
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(AppLocalizations.of(context)!.systemRequirements),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: <Widget>[
+                              Text(AppLocalizations.of(context)!.android6RequirementDescription),
+                              
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text(AppLocalizations.of(context)!.okay),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  return;
+                }
 
                 setState(() {
                   _autoAcceptCalls = v;
@@ -68,7 +99,35 @@ class _SettingsPageState extends State<SettingsPage> {
             SwitchListTile(
               value: _autoSwitchLoudspeaker, 
               onChanged: (v)async {
-
+                var info = await deviceInfoPlugin.androidInfo;
+                if(info.version.sdkInt! < 23 ){
+                  showDialog<void>(
+                    context: context,
+                    barrierDismissible: false, // user must tap button!
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(AppLocalizations.of(context)!.systemRequirements),
+                        content: SingleChildScrollView(
+                          child: ListBody(
+                            children: <Widget>[
+                              Text(AppLocalizations.of(context)!.android6RequirementDescription),
+                              
+                            ],
+                          ),
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text(AppLocalizations.of(context)!.okay),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                  return;
+                }
                 setState(() {
                   _autoSwitchLoudspeaker = v;
                 });
