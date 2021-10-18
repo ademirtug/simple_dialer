@@ -21,9 +21,6 @@ import android.Manifest;
 
 public class OngoingCallActivity extends AppCompatActivity implements SensorEventListener{
 
-
-    AudioManager am = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,19 +77,6 @@ public class OngoingCallActivity extends AppCompatActivity implements SensorEven
         //PROXIMITY LOUD SPEAKER
         SharedPreferences preferences = getSharedPreferences("FlutterSharedPreferences", MODE_PRIVATE);
         SimpleDialerCallService.csh.autoSwitchLoudspeaker = preferences.getBoolean("flutter.autoSwitchLoudspeaker", false);
-
-        // if (checkSelfPermission(Manifest.permission.MODIFY_AUDIO_SETTINGS) != 0) {
-        //     requestPermissions(new String[]{Manifest.permission.MODIFY_AUDIO_SETTINGS},200);
-        //     System.out.println("NO PERM");
-        // // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-        // // app-defined int constant
-
-
-        // }
-        // else{
-        //     System.out.println("PERM EXISTS");
-        // }
-
     }
 
     @Override
@@ -116,7 +100,7 @@ public class OngoingCallActivity extends AppCompatActivity implements SensorEven
             if (event.values[0] >= -SimpleDialerCallService.csh.SENSOR_SENSITIVITY 
                 && event.values[0] <= SimpleDialerCallService.csh.SENSOR_SENSITIVITY) {
                 //near
-                //Toast.makeText(getApplicationContext(), "near", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
                 switchLoudspeaker(false);
             } else {
                 //far
@@ -131,11 +115,11 @@ public class OngoingCallActivity extends AppCompatActivity implements SensorEven
 
     }
     public void switchLoudspeaker(boolean status){
-        if(am == null)
-            am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-
-        am.setMode(AudioManager.MODE_IN_COMMUNICATION);
-        am.setSpeakerphoneOn(status);
+        InCallService srv = (InCallService)SimpleDialerCallService.csh._ctx;
+        if(status)
+            srv.setAudioRoute(CallAudioState.ROUTE_SPEAKER);
+        else
+            srv.setAudioRoute(CallAudioState.ROUTE_WIRED_OR_EARPIECE);
     }
     @Override
     public void finish() {
@@ -144,12 +128,6 @@ public class OngoingCallActivity extends AppCompatActivity implements SensorEven
             SimpleDialerCallService.csh.ica = null;
         }
 
-        if( am != null ){
-            
-            am.setSpeakerphoneOn(false);
-            am.setMode(AudioManager.MODE_NORMAL);
-            am = null;
-        }
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             super.finishAndRemoveTask();
         }

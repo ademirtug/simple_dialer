@@ -37,6 +37,7 @@ public class CallStateHandler extends Call.Callback{
     Sensor proximitySensor = null;
     int SENSOR_SENSITIVITY = 4;
 
+
     CallStateHandler(Context ctx, Call call){
         _ctx = ctx;
         _call = call;
