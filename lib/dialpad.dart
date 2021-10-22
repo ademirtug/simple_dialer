@@ -98,9 +98,8 @@ class _DialpadState extends State<Dialpad> {
 
         if( dt.getDialText().length < 1)
           return;
-          
 
-        await FlutterPhoneDirectCaller.callNumber(dt.getDialText());
+        await callNumber(dt.getDialText());
       },
       child: Icon(Icons.phone_enabled_sharp),
       style: ElevatedButton.styleFrom(

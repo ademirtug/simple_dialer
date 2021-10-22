@@ -23,6 +23,9 @@ Future<void> openDefaultAppsSettings() async {
   await channel.invokeMethod("openDefaultAppsSettings");
 }
 
+Future<void> callNumber(String number) async{
+  await channel.invokeMethod('callNumber',<String, Object>{'number': number});
+}
 
 Future<bool> requestPermissions(Permission pta)async {
 

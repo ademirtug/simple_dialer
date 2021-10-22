@@ -27,8 +27,9 @@ import java.util.*;
 
 public class MainActivity extends FlutterActivity {
     Collator coll = Collator.getInstance(Locale.getDefault());
-    private static final String CHANNEL = "info.pakkudev.simple_dialer/channel";
+    static final String CHANNEL = "info.pakkudev.simple_dialer/channel";
     MethodChannel.Result _result = null;
+    //Registrar registrar;
 
 
     @Override
@@ -49,6 +50,11 @@ public class MainActivity extends FlutterActivity {
                         }
                         case "openDefaultAppsSettings":{
                             result.success(openDefaultAppsSettings());
+                            break;
+                        }
+                        case "callNumber":{
+                            String number = call.argument("number");
+                            callNumber(number);
                             break;
                         }
                         default: {
@@ -111,6 +117,13 @@ public class MainActivity extends FlutterActivity {
             startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));
         }
         return true;
+    }
+    private void callNumber(String number){
+        System.out.println("callnumber");
+        System.out.println(number);
+        Intent phoneCallIntent = new Intent(Intent.ACTION_CALL);
+        phoneCallIntent.setData(Uri.parse("tel:911"));
+        this.startActivity(phoneCallIntent);
     }
 
 }

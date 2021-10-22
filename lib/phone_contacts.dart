@@ -115,7 +115,7 @@ class _ContactTileSheetState extends State<ContactTile> {
               onTap: ()async{
                 if( await requestPermissions(Permission.phone) == false )
                   return;
-                await FlutterPhoneDirectCaller.callNumber(c.phones!.first.value ?? "");
+                await callNumber(c.phones!.first.value ?? "");
               },
               child: SizedBox(width: 56, height: 56, child: Icon(Icons.phone, size: 48)),
             )
