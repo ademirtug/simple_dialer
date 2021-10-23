@@ -122,7 +122,7 @@ public class MainActivity extends FlutterActivity {
         // System.out.println("callnumber");
         // System.out.println(number);
         Intent phoneCallIntent = new Intent(Intent.ACTION_CALL);
-        phoneCallIntent.setData(Uri.parse("tel:" +number--));
+        phoneCallIntent.setData(Uri.parse("tel:" + number));
         this.startActivity(phoneCallIntent);
     }
 

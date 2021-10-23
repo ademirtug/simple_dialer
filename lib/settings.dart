@@ -16,6 +16,7 @@ class _SettingsPageState extends State<SettingsPage> {
   bool _activateRecents = false;
   bool _autoAcceptCalls = false;
   bool _autoSwitchLoudspeaker = false;
+  bool _displaySIMContacts = false;
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
 
@@ -150,6 +151,20 @@ class _SettingsPageState extends State<SettingsPage> {
               title: Text(AppLocalizations.of(context)!.proximityLoudspeaker),
               subtitle: Text(AppLocalizations.of(context)!.proximityLoudspeakerDescription),
             ),
+            // SwitchListTile(
+            //   value: _displaySIMContacts, 
+            //   onChanged: (v)async {
+            //     setState(() {
+            //       _displaySIMContacts = v;
+            //     });
+
+            //     SharedPreferences prefs = await SharedPreferences.getInstance();
+            //     prefs.setBool("displaySIMContacts", v);
+
+            //   },
+            //   title: Text("SIM Contacts"),
+            //   subtitle: Text("Display contacts found in SIM card."),
+            // ),
           ],
         )
       )
@@ -164,14 +179,12 @@ class _SettingsPageState extends State<SettingsPage> {
         _activateRecents = prefs.getBool("activateRecents") ?? false;
       });
     }else{
-      // if(! (prefs.getBool("neverAskDefaultPhoneApp") ?? false )){
-      //   makeDefaultApp(context);
-      // }
       _activateRecents = false;
       prefs.setBool("activateRecents", false);
     }
     _autoAcceptCalls = prefs.getBool("autoAcceptCalls") ?? false;
     _autoSwitchLoudspeaker = prefs.getBool("autoSwitchLoudspeaker") ?? false;
+    _displaySIMContacts = prefs.getBool("displaySIMContacts") ?? false;
   }
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
@@ -184,9 +197,6 @@ class _SettingsPageState extends State<SettingsPage> {
     }
     return Colors.red;
   }
-
-
-
 
 }
 

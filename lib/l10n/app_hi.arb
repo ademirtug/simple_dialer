@@ -17,5 +17,6 @@
     "proximityLoudspeakerDescription" : "निकटता सेंसर को स्वचालित रूप से लाउडस्पीकर पर स्विच करने की अनुमति दें जब आस-पास कोई वस्तु न हो (जैसे उपयोगकर्ता के कान)।",
     "systemRequirements" : "सिस्टम आवश्यकताएं",
     "android6RequirementDescription" : "इस विकल्प के लिए Android 6.0 या नए संस्करणों की आवश्यकता है।",
-    "okay" : "ठीक"
+    "okay" : "ठीक",
+    "unexpectedError" : "अप्रत्याशित त्रुटि"
 }

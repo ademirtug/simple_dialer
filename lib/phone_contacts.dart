@@ -3,8 +3,12 @@ import 'dart:typed_data';
 import 'package:contacts_service/contacts_service.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'util.dart';
 import 'dialpad.dart';
+
+List<Contact> cx = List.empty();
+bool _contactsLoaded = false;
 
 class PhoneContatcsSheet extends StatefulWidget {
   PhoneContatcsSheet({Key? key}) : super(key: key);
@@ -19,38 +23,64 @@ class _PhoneContatcsSheetState extends State<PhoneContatcsSheet> {
   @override
   void initState() {
     super.initState();
-    refreshContacts();
+    if(!_contactsLoaded)
+      refreshContacts();
   }
 
   Future<void> refreshContacts() async {
 
     if( await requestPermissions(Permission.contacts) == false)
+    {
+      setState(() {
+        _contactsLoaded = true;
+        contacts = new List.empty();
+      });
       return;
-
+    }
+    
     //Iterable contacts = await _channel.invokeMethod("addSimContact");
     //var ictx = contacts.map((m) => );
+    
+    try{
+      cx = (await ContactsService.getContacts( withThumbnails: false, orderByGivenName: true )).toList();
 
-    var cx = (await ContactsService.getContacts(withThumbnails: false, orderByGivenName: true )).toList();
+      // cx.forEach((element) { 
+      //   if(element.androidAccountTypeRaw!.contains("sim")){
+      //     cx.remove(element);
+      //   }
+      // });
 
-    setState(() {
-      contacts = cx;
-    });
-
-    for (final contact in contacts) {
-      //providers.add(contact.androidAccountTypeRaw ?? "");
-      ContactsService.getAvatar(contact).then((avatar) {
-        if (avatar == null) 
-          return;
-        setState(() => contact.avatar = avatar);
+    } on Exception catch(e){
+      showInfoDialog(context, "Unexpected Error", e.toString());
+    }
+    finally{
+      setState(() {
+        _contactsLoaded = true;
+        contacts = cx;
       });
     }
+
+    try{
+      for (final contact in contacts) {
+        //providers.add(contact.androidAccountTypeRaw ?? "");
+        ContactsService.getAvatar(contact).then((avatar) {
+          if (avatar == null) 
+            return;
+          setState(() => contact.avatar = avatar);
+        });
+      }
+
+    } on Exception catch(e){
+      showInfoDialog(context, "Unexpected Error", e.toString());
+    }
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: contacts.length > 0 
+        child: _contactsLoaded 
         ? RefreshIndicator(child: 
             ListView.builder(
               itemCount: contacts.length,
@@ -114,7 +144,13 @@ class _ContactTileSheetState extends State<ContactTile> {
               onTap: ()async{
                 if( await requestPermissions(Permission.phone) == false )
                   return;
-                await callNumber(c.phones!.first.value ?? "");
+                
+                try{
+                  await callNumber(c.phones!.first.value ?? "");
+                }on Exception catch(e){
+                  showInfoDialog(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
+                }
+
               },
               child: SizedBox(width: 56, height: 56, child: Icon(Icons.phone, size: 48)),
             )

@@ -17,5 +17,6 @@
     "proximityLoudspeakerDescription" : "Allow proximity sensor to automatically switch to loudspeaker when there is no object in vicinity(like user's ears).",
     "systemRequirements" : "System Requirements",
     "android6RequirementDescription" : "This option requires Android 6.0 or newer versions.",
-    "okay" : "Ok"
+    "okay" : "Ok",
+    "unexpectedError" : "Unexpected Error"
 }

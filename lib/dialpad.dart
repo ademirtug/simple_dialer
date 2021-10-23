@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'util.dart';
   
 class Dialpad extends StatefulWidget {
@@ -97,8 +98,13 @@ class _DialpadState extends State<Dialpad> {
 
         if( dt.getDialText().length < 1)
           return;
-
-        await callNumber(dt.getDialText());
+          
+        try{
+          await callNumber(dt.getDialText());
+        }on Exception catch(e){
+          showInfoDialog(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
+        }
+        
       },
       child: Icon(Icons.phone_enabled_sharp),
       style: ElevatedButton.styleFrom(

@@ -1,12 +1,13 @@
 import 'dart:ui';
 import 'package:call_log/call_log.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'util.dart';
 import 'dialpad.dart';
+
 
 
 class HistorySheet extends StatefulWidget {
@@ -18,6 +19,7 @@ class HistorySheet extends StatefulWidget {
 
 class _HistorySheetState extends State<HistorySheet> {
   List<CallLogEntry> _logs = [];
+  bool _logLoaded = false;
 
   @override
   void initState() {
@@ -26,12 +28,20 @@ class _HistorySheetState extends State<HistorySheet> {
   }
 
   Future<void> refreshHistory() async {
-    if( await requestPermissions(Permission.log) == false)
-      return;
 
-    var clx = (await CallLog.get()).toList();
+    if( await requestPermissions(Permission.log) == false)
+    {
+      setState(() {
+        _logLoaded = true;
+        _logs = new List.empty();
+      });
+      return;
+    }
+
+    List<CallLogEntry> clx = (await CallLog.get()).toList();
 
     setState(() {
+      _logLoaded = true;
       _logs = clx;
     });
   }
@@ -40,7 +50,7 @@ class _HistorySheetState extends State<HistorySheet> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: _logs.length > 0 
+        child: _logLoaded 
         ? RefreshIndicator(child: 
             ListView.builder(
               itemCount: _logs.length,
@@ -106,8 +116,14 @@ class _CallLogTileSheetState extends State<CallLogTile> {
               onTap: ()async{
                 if( await requestPermissions(Permission.phone) == false || await requestPermissions(Permission.contacts) == false)
                   return;
-                  
-                await FlutterPhoneDirectCaller.callNumber(widget.cle.number ?? "");              
+                
+                try{
+                  await callNumber(widget.cle.number ?? "");
+                }on Exception catch(e){
+                  showInfoDialog(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
+                }
+
+                              
               },
               child: SizedBox(width: 56, height: 56, child: Icon(Icons.phone, size: 48)),
             )

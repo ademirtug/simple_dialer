@@ -89,9 +89,13 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
 
     public void acceptCall(){
         SimpleDialerCallService.csh.answer();
+        try{
+            Intent ongoingCallScreen = new Intent(IncomingCallActivity.this, OngoingCallActivity.class);
+            startActivity(ongoingCallScreen);
+        }catch(Exception e){
 
-        Intent ongoingCallScreen = new Intent(IncomingCallActivity.this, OngoingCallActivity.class);
-        startActivity(ongoingCallScreen);
+        }
+
     }
 
 

@@ -17,5 +17,6 @@
     "proximityLoudspeakerDescription" : "Yakınlık sensörünün yakınlarda herhangi bir nesne olmadığında (kullanıcının kulakları gibi) otomatik olarak hoparlöre geçmesine izin verin.",
     "systemRequirements" : "Sistem Gereksinimleri",
     "android6RequirementDescription" : "Bu seçenek, Android 6.0 veya daha yeni sürümleri gerektirir.",
-    "okay" : "Tamam"
+    "okay" : "Tamam",
+    "unexpectedError" : "Beklenmeyen Hata"
 }

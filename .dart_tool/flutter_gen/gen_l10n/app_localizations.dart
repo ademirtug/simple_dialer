@@ -216,6 +216,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ok'**
   String get okay;
+
+  /// No description provided for @unexpectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unexpected Error'**
+  String get unexpectedError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

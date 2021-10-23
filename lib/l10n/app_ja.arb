@@ -17,5 +17,6 @@
     "proximityLoudspeakerDescription" : "近くに物体がない場合（ユーザーの耳など）、近接センサーが自動的にスピーカーに切り替わるようにします",
     "systemRequirements" : "システム要求",
     "android6RequirementDescription" : "このオプションには、Android6.0以降のバージョンが必要です。",
-    "okay" : "わかった"
+    "okay" : "わかった",
+    "unexpectedError" : "予期しないエラー"
 }

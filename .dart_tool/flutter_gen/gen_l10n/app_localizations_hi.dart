@@ -63,4 +63,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get okay => 'ठीक';
+
+  @override
+  String get unexpectedError => 'अप्रत्याशित त्रुटि';
 }

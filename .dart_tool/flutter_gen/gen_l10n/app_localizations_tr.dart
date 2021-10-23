@@ -63,4 +63,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get okay => 'Tamam';
+
+  @override
+  String get unexpectedError => 'Beklenmeyen Hata';
 }

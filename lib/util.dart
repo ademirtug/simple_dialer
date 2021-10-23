@@ -98,7 +98,7 @@ Future<bool> makeDefaultApp(BuildContext context) async{
   return false;
 }
 
-  void defaultAppPermissionNeeded(BuildContext context) {
+void defaultAppPermissionNeeded(BuildContext context) {
   // set up the buttons
   Widget cancelButton = TextButton(
     child: Text(AppLocalizations.of(context)!.cancel),
@@ -133,6 +133,30 @@ Future<bool> makeDefaultApp(BuildContext context) async{
   );
 }
 
+void showInfoDialog(BuildContext context, String title, String message){
+    Widget continueButton = TextButton(
+    child: Text(AppLocalizations.of(context)!.okay),
+    onPressed:  () {
+      openDefaultAppsSettings();
+      Navigator.of(context).pop();
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: Text(title),
+    content: Text(message),
+    actions: [
+      continueButton,
+    ],
+  );
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
 class LabeledCheckboxStateless extends StatelessWidget {
   const LabeledCheckboxStateless({
     Key? key,

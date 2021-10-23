@@ -99,15 +99,23 @@ public class CallStateHandler extends Call.Callback{
     }
 
     public void onRinging(){
-       _isIncomingCall = true;
-       Intent incomingCallScreen = new Intent(_ctx, IncomingCallActivity.class);
-       incomingCallScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-       _ctx.startActivity(incomingCallScreen);
+        try{
+            _isIncomingCall = true;
+            Intent incomingCallScreen = new Intent(_ctx, IncomingCallActivity.class);
+            incomingCallScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            _ctx.startActivity(incomingCallScreen);
+        }catch(Exception e){
+
+        }
     }
-    public void onDialing(){
-        Intent ongoingCallScreen = new Intent(_ctx, OngoingCallActivity.class);
-        ongoingCallScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        _ctx.startActivity(ongoingCallScreen);
+    public void onDialing(){      
+        try{
+            Intent ongoingCallScreen = new Intent(_ctx, OngoingCallActivity.class);
+            ongoingCallScreen.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            _ctx.startActivity(ongoingCallScreen);
+        }catch(Exception e){
+
+        }
     }
     public void onActivated(){
 
@@ -120,54 +128,108 @@ public class CallStateHandler extends Call.Callback{
         return _isIncomingCall;
     }
     public String getContactDisplayName(){
-        return _call.getDetails().getContactDisplayName();
+        String rv = "";
+        try{
+            rv = _call.getDetails().getContactDisplayName();
+        }catch(Exception e){
+
+        }
+        finally{
+            return rv;
+        }
     }
     public String getCallPhoneNumber(){
-        return _call.getDetails().getHandle().toString().replaceAll("tel:", "").replaceAll("%2B", "+");
+        String rv = "";
+        try{
+            rv = _call.getDetails().getHandle().toString().replaceAll("tel:", "").replaceAll("%2B", "+");
+        }catch(Exception e){
+
+        }
+        finally{
+            return rv;
+        }
     }
     public String getCallerId(){
-        return getContactId(getCallPhoneNumber());
+        String rv = "";
+        try{
+            rv = getContactId(getCallPhoneNumber());
+        }catch(Exception e){
+
+        }
+        finally{
+            return rv;
+        }
     }
-    private String getContactId(String number) {     
-        Uri contactUri = Uri.withAppendedPath(Contacts.Phones.CONTENT_FILTER_URL, Uri.encode(number));
-        Cursor c = _ctx.getContentResolver().query(contactUri, new String[]{Contacts.Phones.PERSON_ID}, null, null, null);
-        if (c.moveToFirst()) {
-            return c.getString(c.getColumnIndex(Contacts.Phones.PERSON_ID));
+    private String getContactId(String number) { 
+        try{
+            Uri contactUri = Uri.withAppendedPath(Contacts.Phones.CONTENT_FILTER_URL, Uri.encode(number));
+            Cursor c = _ctx.getContentResolver().query(contactUri, new String[]{Contacts.Phones.PERSON_ID}, null, null, null);
+            if (c.moveToFirst()) {
+                return c.getString(c.getColumnIndex(Contacts.Phones.PERSON_ID));
+            }
+        }catch(Exception e){
+
         }
         return "0";
     }
     public Bitmap getCallerPhoto(){
-        if( SimpleDialerCallService.csh.callerPhoto == null )
-            SimpleDialerCallService.csh.callerPhoto = loadContactPhoto(parseLong(SimpleDialerCallService.csh.getCallerId()));
+        try{
+            if( SimpleDialerCallService.csh.callerPhoto == null )
+                SimpleDialerCallService.csh.callerPhoto = loadContactPhoto(parseLong(SimpleDialerCallService.csh.getCallerId()));
+        }catch(Exception e){
+
+        }
 
         return SimpleDialerCallService.csh.callerPhoto;
     }
     public String getCallerDisplayName(ContentResolver cr){
-        String tel = getCallPhoneNumber();
-        Uri uri=Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,tel);
-
-        String[] projection = new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME};
-
+        String rv = "";
         String contactName="";
-        Cursor cursor=cr.query(uri,projection,null,null,null);
+        String tel = "";
+        try{
+            tel = getCallPhoneNumber();
+            Uri uri=Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,tel);
 
-        if (cursor != null) {
-            if(cursor.moveToFirst()) {
-                contactName=cursor.getString(0);
+            String[] projection = new String[]{ContactsContract.PhoneLookup.DISPLAY_NAME};
+            Cursor cursor=cr.query(uri,projection,null,null,null);
+
+            if (cursor != null) {
+                if(cursor.moveToFirst()) {
+                    contactName=cursor.getString(0);
+                }
+                cursor.close();
             }
-            cursor.close();
+            rv = contactName.isEmpty() ? tel : contactName;
+        }catch(Exception e){
+
         }
-        return contactName.isEmpty() ? tel : contactName;
+        finally{
+            return rv;
+        }
     }
     public Bitmap loadContactPhoto(long id)
     {
-        Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, id);
-        InputStream input = ContactsContract.Contacts.openContactPhotoInputStream(_ctx.getContentResolver(), uri, true);
-        if (input == null) {
-            return null;
+        InputStream input = null;
+        try{
+            Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, id);
+            input = ContactsContract.Contacts.openContactPhotoInputStream(_ctx.getContentResolver(), uri, true);
+            if (input == null) {
+                return null;
+            }
+            return BitmapFactory.decodeStream(input);
+        }catch(Exception e){
+
+        }finally{
+            if (input != null) {
+                try{
+                    input.close();
+                }catch(IOException ioe){
+
+                }
+            }
         }
-        //input.close();
-        return BitmapFactory.decodeStream(input);
+        return null;
+
     }
     public SensorManager getSensorManager(){
         if( sensorManager == null )
