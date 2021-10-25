@@ -66,4 +66,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get unexpectedError => '予期しないエラー';
+
+  @override
+  String get details => '詳細';
 }

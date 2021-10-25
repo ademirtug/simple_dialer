@@ -222,6 +222,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unexpected Error'**
   String get unexpectedError;
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

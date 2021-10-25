@@ -18,5 +18,6 @@
     "systemRequirements" : "Sistem Gereksinimleri",
     "android6RequirementDescription" : "Bu seçenek, Android 6.0 veya daha yeni sürümleri gerektirir.",
     "okay" : "Tamam",
-    "unexpectedError" : "Beklenmeyen Hata"
+    "unexpectedError" : "Beklenmeyen Hata",
+    "details": "Detaylar"
 }

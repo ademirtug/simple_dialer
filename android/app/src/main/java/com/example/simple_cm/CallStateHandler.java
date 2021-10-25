@@ -157,15 +157,16 @@ public class CallStateHandler extends Call.Callback{
 
         }
         finally{
+            System.out.println("getCallerId:" + rv);
             return rv;
         }
     }
     private String getContactId(String number) { 
         try{
-            Uri contactUri = Uri.withAppendedPath(Contacts.Phones.CONTENT_FILTER_URL, Uri.encode(number));
-            Cursor c = _ctx.getContentResolver().query(contactUri, new String[]{Contacts.Phones.PERSON_ID}, null, null, null);
+            Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(number));
+            Cursor c = _ctx.getContentResolver().query(contactUri, new String[]{ContactsContract.PhoneLookup.CONTACT_ID}, null, null, null);
             if (c.moveToFirst()) {
-                return c.getString(c.getColumnIndex(Contacts.Phones.PERSON_ID));
+                return c.getString(c.getColumnIndex(ContactsContract.PhoneLookup.CONTACT_ID));
             }
         }catch(Exception e){
 
@@ -177,9 +178,7 @@ public class CallStateHandler extends Call.Callback{
             if( SimpleDialerCallService.csh.callerPhoto == null )
                 SimpleDialerCallService.csh.callerPhoto = loadContactPhoto(parseLong(SimpleDialerCallService.csh.getCallerId()));
         }catch(Exception e){
-
         }
-
         return SimpleDialerCallService.csh.callerPhoto;
     }
     public String getCallerDisplayName(ContentResolver cr){
@@ -212,8 +211,11 @@ public class CallStateHandler extends Call.Callback{
         InputStream input = null;
         try{
             Uri uri = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, id);
+            System.out.println("Uri:" + uri.toString());
+            //uri = uri.substring(0, uri.length() - 6);
             input = ContactsContract.Contacts.openContactPhotoInputStream(_ctx.getContentResolver(), uri, true);
             if (input == null) {
+                System.out.println("photo is null...");
                 return null;
             }
             return BitmapFactory.decodeStream(input);

@@ -102,7 +102,7 @@ class _DialpadState extends State<Dialpad> {
         try{
           await callNumber(dt.getDialText());
         }on Exception catch(e){
-          showInfoDialog(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
+          showToast(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
         }
         
       },

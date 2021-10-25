@@ -18,5 +18,6 @@
     "systemRequirements" : "システム要求",
     "android6RequirementDescription" : "このオプションには、Android6.0以降のバージョンが必要です。",
     "okay" : "わかった",
-    "unexpectedError" : "予期しないエラー"
+    "unexpectedError" : "予期しないエラー",
+    "details": "詳細"
 }

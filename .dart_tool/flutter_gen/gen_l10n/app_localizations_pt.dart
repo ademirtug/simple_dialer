@@ -66,6 +66,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get unexpectedError => 'Erro inesperado';
+
+  @override
+  String get details => 'detalhes';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -131,4 +134,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get unexpectedError => 'Erro inesperado';
+
+  @override
+  String get details => 'detalhes';
 }

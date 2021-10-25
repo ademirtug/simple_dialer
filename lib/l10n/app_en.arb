@@ -18,5 +18,6 @@
     "systemRequirements" : "System Requirements",
     "android6RequirementDescription" : "This option requires Android 6.0 or newer versions.",
     "okay" : "Ok",
-    "unexpectedError" : "Unexpected Error"
+    "unexpectedError" : "Unexpected Error",
+    "details": "Details"
 }

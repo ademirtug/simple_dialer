@@ -18,5 +18,6 @@
     "systemRequirements" : "सिस्टम आवश्यकताएं",
     "android6RequirementDescription" : "इस विकल्प के लिए Android 6.0 या नए संस्करणों की आवश्यकता है।",
     "okay" : "ठीक",
-    "unexpectedError" : "अप्रत्याशित त्रुटि"
+    "unexpectedError" : "अप्रत्याशित त्रुटि",
+    "details": "विवरण"
 }

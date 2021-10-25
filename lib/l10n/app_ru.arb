@@ -18,5 +18,6 @@
     "systemRequirements" : "Системные Требования",
     "android6RequirementDescription" : "Для этого варианта требуется Android 6.0 или новее.",
     "okay" : "Ладно",
-    "unexpectedError" : "Неожиданная ошибка"
+    "unexpectedError" : "Неожиданная ошибка",
+    "details": "Детали"
 }

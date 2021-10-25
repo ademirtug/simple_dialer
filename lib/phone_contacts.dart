@@ -51,7 +51,7 @@ class _PhoneContatcsSheetState extends State<PhoneContatcsSheet> {
       // });
 
     } on Exception catch(e){
-      showInfoDialog(context, "Unexpected Error", e.toString());
+      showToast(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
     }
     finally{
       setState(() {
@@ -71,7 +71,7 @@ class _PhoneContatcsSheetState extends State<PhoneContatcsSheet> {
       }
 
     } on Exception catch(e){
-      showInfoDialog(context, "Unexpected Error", e.toString());
+      showToast(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
     }
 
   }
@@ -148,7 +148,7 @@ class _ContactTileSheetState extends State<ContactTile> {
                 try{
                   await callNumber(c.phones!.first.value ?? "");
                 }on Exception catch(e){
-                  showInfoDialog(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
+                  showToast(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
                 }
 
               },

@@ -16,7 +16,7 @@ class _SettingsPageState extends State<SettingsPage> {
   bool _activateRecents = false;
   bool _autoAcceptCalls = false;
   bool _autoSwitchLoudspeaker = false;
-  bool _displaySIMContacts = false;
+  //bool _displaySIMContacts = false;
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
 
@@ -184,7 +184,7 @@ class _SettingsPageState extends State<SettingsPage> {
     }
     _autoAcceptCalls = prefs.getBool("autoAcceptCalls") ?? false;
     _autoSwitchLoudspeaker = prefs.getBool("autoSwitchLoudspeaker") ?? false;
-    _displaySIMContacts = prefs.getBool("displaySIMContacts") ?? false;
+    //_displaySIMContacts = prefs.getBool("displaySIMContacts") ?? false;
   }
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{

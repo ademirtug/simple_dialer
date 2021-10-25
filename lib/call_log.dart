@@ -120,7 +120,7 @@ class _CallLogTileSheetState extends State<CallLogTile> {
                 try{
                   await callNumber(widget.cle.number ?? "");
                 }on Exception catch(e){
-                  showInfoDialog(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
+                  showToast(context, AppLocalizations.of(context)!.unexpectedError, e.toString());
                 }
 
                               

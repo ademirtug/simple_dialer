@@ -66,4 +66,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get unexpectedError => 'Неожиданная ошибка';
+
+  @override
+  String get details => 'Детали';
 }

@@ -133,11 +133,24 @@ void defaultAppPermissionNeeded(BuildContext context) {
   );
 }
 
+void showToast(BuildContext context, String message, String errorMessage) {
+  final scaffold = ScaffoldMessenger.of(context);
+  scaffold.showSnackBar(
+    SnackBar(
+      content: Text(message),
+      action: SnackBarAction(label: AppLocalizations.of(context)!.details, 
+      onPressed: (){
+          scaffold.hideCurrentSnackBar();
+          showInfoDialog(context, AppLocalizations.of(context)!.unexpectedError, errorMessage);
+      },)
+    )
+  );
+}
+
 void showInfoDialog(BuildContext context, String title, String message){
     Widget continueButton = TextButton(
     child: Text(AppLocalizations.of(context)!.okay),
     onPressed:  () {
-      openDefaultAppsSettings();
       Navigator.of(context).pop();
     },
   );
@@ -157,6 +170,7 @@ void showInfoDialog(BuildContext context, String title, String message){
     },
   );
 }
+
 class LabeledCheckboxStateless extends StatelessWidget {
   const LabeledCheckboxStateless({
     Key? key,
