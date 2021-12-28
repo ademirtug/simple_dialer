@@ -142,4 +142,9 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        return;
+    }
+
 }

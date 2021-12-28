@@ -125,5 +125,9 @@ public class MainActivity extends FlutterActivity {
         phoneCallIntent.setData(Uri.parse("tel:" + number));
         this.startActivity(phoneCallIntent);
     }
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 
 }

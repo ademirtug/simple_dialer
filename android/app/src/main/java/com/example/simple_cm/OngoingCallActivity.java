@@ -135,4 +135,8 @@ public class OngoingCallActivity extends AppCompatActivity implements SensorEven
             super.finish();
         }
     }
+    @Override
+    public void onBackPressed() {
+        return;
+    }
 }
