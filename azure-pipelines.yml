@@ -9,5 +9,5 @@ steps:
   inputs:
     target: 'apk'
     projectDirectory: 'C:\Users\akn\source\simple_dialer'
-    flutterDirectory: 'C:\Dev'
+    flutterDirectory: 'C:\Dev\flutter\bin'
     debugMode: true
