@@ -1,0 +1,65 @@
+﻿[
+    {
+        "file":  "app-icon-1024.png",
+        "width":  1024,
+        "height":  1024,
+        "bytes":  28405,
+        "sha256":  "9E929A9169886873EC0E63D1C50281F67195AEA16154985BFC47091037D903B4"
+    },
+    {
+        "file":  "app-icon-216.png",
+        "width":  216,
+        "height":  216,
+        "bytes":  4727,
+        "sha256":  "121FA3D56B5FB678B826A407325D03DF14B27129088B8F74966588CD00C35512"
+    },
+    {
+        "file":  "app-icon-512.png",
+        "width":  512,
+        "height":  512,
+        "bytes":  12623,
+        "sha256":  "9E77546A38CBF601AD6610CAF3A6501C123BB968DEEDAE8822BF1EB05BFC919B"
+    },
+    {
+        "file":  "feature-graphic-1024x500.png",
+        "width":  1024,
+        "height":  500,
+        "bytes":  583936,
+        "sha256":  "356E0D5A6DF665B9F91CC5F3267CF8AAA5662C74864CEBC0D20EDAADE0F85F2C"
+    },
+    {
+        "file":  "screenshots/01-simplified-contacts.png",
+        "width":  1080,
+        "height":  1920,
+        "bytes":  141674,
+        "sha256":  "2B3E2CB33D4F0DB418A6D4240584024DD5799F9C242A9D9692F49ED261CC12D6"
+    },
+    {
+        "file":  "screenshots/02-contacts.png",
+        "width":  1080,
+        "height":  1920,
+        "bytes":  142645,
+        "sha256":  "CA1611482F9894AB6D9CAC248D77636122E4E5F134974EACB2F12DABEEAC9107"
+    },
+    {
+        "file":  "screenshots/04-dialpad.png",
+        "width":  1080,
+        "height":  1920,
+        "bytes":  106560,
+        "sha256":  "4B7884C62DB6FBA7A6A21DFBCA0566A1F0752857DB042690C112AE3CC7BF814B"
+    },
+    {
+        "file":  "screenshots/05-visibility-settings.png",
+        "width":  1080,
+        "height":  1920,
+        "bytes":  143192,
+        "sha256":  "90BA6D2446B4B21BA1C02B8A62EB1C4B3B33399CF6AA1439B4C4C696C2E9C2B9"
+    },
+    {
+        "file":  "screenshots/06-appearance-settings.png",
+        "width":  1080,
+        "height":  1920,
+        "bytes":  130475,
+        "sha256":  "415FFA5142FA8D80EFD6FFE168715EF1ACA3E4ED985DA4C64F7D60009A0E10B2"
+    }
+]

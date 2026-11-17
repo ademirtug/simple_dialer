@@ -1,0 +1,8 @@
+<resources>
+    <color name="launcher_background">#FFFFFF</color>
+    <color name="launcher_monochrome">#202020</color>
+    <color name="launcher_ocean">#175DB5</color>
+    <color name="launcher_forest">#256B43</color>
+    <color name="launcher_rose">#A53465</color>
+    <color name="launcher_sunset">#915000</color>
+</resources>

@@ -1,0 +1,7 @@
+{
+  "lang": "en-US",
+  "appName": "Simple Dialer",
+  "briefInfo": "A simple phone dialer with customizable controls.",
+  "appDesc": "Simple Dialer is a phone app with familiar calling controls and settings that let you simplify the interface.\n\nMake and answer calls, use the dialpad, search your contacts, view recent calls, and keep favorite contacts close at hand. Choose which tabs and call controls to show, or hide contact details for a simpler screen.\n\nPersonalize the app with five color palettes and light or dark appearance that follows your phone. Choose incoming-call buttons, vertical swipes, or a horizontal slide, and safely try the selected style in an interactive preview.\n\nDuring calls, use mute, speaker, and the keypad. Hold, swap, and additional-call features depend on your device and carrier. Optional proximity-sensor modes can answer calls or switch the speaker automatically; both are off by default.\n\nSimple Dialer supports 17 languages, including Simplified and Traditional Chinese. It requires Android 6.0 or newer. Set it as your default phone app for incoming and ongoing call handling. Contact and call-history access are optional; manual dialing remains available when those permissions are declined.",
+  "newFeatures": "Customizable contact visibility, five color palettes, incoming-call control styles with safe previews, and optional proximity-based call handling."
+}

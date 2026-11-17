@@ -1,0 +1,10 @@
+{
+  "app-icon-512.png": "Blue telephone receiver on a white background.",
+  "feature-graphic-1024x500.png": "Simple Dialer: Everyday calling, made simpler. Two adults enjoy a phone conversation on a pale blue background.",
+  "screenshots/01-simplified-contacts.png": "A simplified contacts-only layout with fictional contacts, call buttons, and a dialpad button.",
+  "screenshots/02-contacts.png": "Contacts list with search and the optional Favorites, Recents, and Contacts tabs enabled.",
+  "screenshots/03-favorites.png": "Favorite contacts displayed as cards with initial avatars and contact details buttons.",
+  "screenshots/04-dialpad.png": "The app's dialpad with number keys and a call button, showing a fictional phone number.",
+  "screenshots/05-visibility-settings.png": "Visibility settings for showing or hiding contacts, favorites, recents, contact details, and optional call controls.",
+  "screenshots/06-appearance-settings.png": "Appearance and call-handling settings with color palettes and incoming-call control choices."
+}

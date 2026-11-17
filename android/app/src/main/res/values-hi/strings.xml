@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">डायलर</string>
-    <string name="makingCall">बुला रहा है...</string>
-    <string name="incomingCall">आने वाली कॉल</string>
-</resources>

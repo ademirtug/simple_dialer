@@ -1,0 +1,4 @@
+<resources>
+    <!-- Keep the product name in system dialogs distinct from the localized launcher label. -->
+    <string name="system_app_name" translatable="false">Simple Dialer</string>
+</resources>

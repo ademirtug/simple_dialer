@@ -1,0 +1,66 @@
+[
+    {
+        "file":  "app-icon-512.png",
+        "width":  512,
+        "height":  512,
+        "pixel_format":  "Format32bppArgb",
+        "bytes":  12645,
+        "sha256":  "BD6EA09CF7CDB0D41D9EEAD962D1690ACA9F96AA6C40099CF3786EFC362652AE"
+    },
+    {
+        "file":  "feature-graphic-1024x500.png",
+        "width":  1024,
+        "height":  500,
+        "pixel_format":  "Format24bppRgb",
+        "bytes":  583936,
+        "sha256":  "356E0D5A6DF665B9F91CC5F3267CF8AAA5662C74864CEBC0D20EDAADE0F85F2C"
+    },
+    {
+        "file":  "screenshots/01-simplified-contacts.png",
+        "width":  1080,
+        "height":  1920,
+        "pixel_format":  "Format32bppArgb",
+        "bytes":  141674,
+        "sha256":  "2B3E2CB33D4F0DB418A6D4240584024DD5799F9C242A9D9692F49ED261CC12D6"
+    },
+    {
+        "file":  "screenshots/02-contacts.png",
+        "width":  1080,
+        "height":  1920,
+        "pixel_format":  "Format32bppArgb",
+        "bytes":  142645,
+        "sha256":  "CA1611482F9894AB6D9CAC248D77636122E4E5F134974EACB2F12DABEEAC9107"
+    },
+    {
+        "file":  "screenshots/03-favorites.png",
+        "width":  1080,
+        "height":  1920,
+        "pixel_format":  "Format32bppArgb",
+        "bytes":  92959,
+        "sha256":  "054296FEF61C68B8C97EB978485B9E00B34827E7A6465F66791B215204920A3F"
+    },
+    {
+        "file":  "screenshots/04-dialpad.png",
+        "width":  1080,
+        "height":  1920,
+        "pixel_format":  "Format32bppArgb",
+        "bytes":  106560,
+        "sha256":  "4B7884C62DB6FBA7A6A21DFBCA0566A1F0752857DB042690C112AE3CC7BF814B"
+    },
+    {
+        "file":  "screenshots/05-visibility-settings.png",
+        "width":  1080,
+        "height":  1920,
+        "pixel_format":  "Format32bppArgb",
+        "bytes":  143192,
+        "sha256":  "90BA6D2446B4B21BA1C02B8A62EB1C4B3B33399CF6AA1439B4C4C696C2E9C2B9"
+    },
+    {
+        "file":  "screenshots/06-appearance-settings.png",
+        "width":  1080,
+        "height":  1920,
+        "pixel_format":  "Format32bppArgb",
+        "bytes":  130475,
+        "sha256":  "415FFA5142FA8D80EFD6FFE168715EF1ACA3E4ED985DA4C64F7D60009A0E10B2"
+    }
+]

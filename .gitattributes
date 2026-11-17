@@ -1,2 +1,4 @@
-# Auto detect text files and perform LF normalization
+# Normalize source files while keeping the Windows wrapper executable in cmd.
 * text=auto
+gradlew text eol=lf
+*.bat text eol=crlf
