@@ -80,25 +80,3 @@ Instrumentation tests run on a connected test device or emulator with `:app:conn
 ```
 
 The fixtures use fictional contacts. Simulated calls do not exercise cellular audio or carrier services. Lock-screen behavior, call waiting, dual SIM, conference calls, and translations still need review on the intended devices and networks.
-
-## Release signing
-
-Release credentials are stored outside the repository at `~/.signing/simple-dialer/key.properties`. Copy [keystore.properties.example](keystore.properties.example) to that location and supply the registered upload keystore's details. Set `SIGNING_ROOT` to use another signing directory.
-
-```sh
-./gradlew :app:assembleRelease :app:bundleRelease
-```
-
-Outputs are written to `app/build/outputs/apk/release/` and `app/build/outputs/bundle/release/`. Without the release properties file, the build falls back to the local Android debug key. Configure the registered upload key before building a store update. See [Signing configuration](SIGNING.md) for verification and backup guidance.
-
-## Data and permissions
-
-Contacts and call history are read from Android's providers. Contact edits are handled by the system contact editor; local favorites and interface preferences are stored with DataStore. The app does not record call audio or send SMS messages. The incoming-call message action opens the system SMS composer.
-
-Firebase Analytics collects its standard automatic events. App code does not log contact details or call data as custom analytics events. The Firebase configuration and all signing and service-account credentials are kept outside version control.
-
-## Store assets
-
-Google Play images are in [artwork/store/en-US](artwork/store/en-US/). Huawei AppGallery images and listing files are in [artwork/store/huawei](artwork/store/huawei/). Each image set includes upload notes and a checksum manifest. Screenshots show fictional data captured from the app.
-
-See [Huawei publishing](docs/huawei-publishing.md) for the AppGallery helper and release-draft commands.
