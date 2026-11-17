@@ -2,6 +2,12 @@
 
 A native Android phone app with contacts, recent calls, favorites, and a configurable call screen. The interface can be simplified by hiding tabs and optional controls in Settings.
 
+Install the published app from Google Play:
+
+<a href="https://play.google.com/store/apps/details?id=info.pakkudev.simple_dialer">
+  <img src="artwork/store/google-play-badge.png" alt="Get it on Google Play" width="200">
+</a>
+
 The current project is written in Kotlin with Jetpack Compose. The earlier Flutter implementation is available in the repository's commit history.
 
 | Detail | Value |
