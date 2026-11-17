@@ -8,31 +8,6 @@ Install the published app from Google Play:
   <img src="artwork/store/google-play-badge.png" alt="Get it on Google Play" width="200">
 </a>
 
-The current project is written in Kotlin with Jetpack Compose. The earlier Flutter implementation is available in the repository's commit history.
-
-| Detail | Value |
-| --- | --- |
-| Android support | Android 6.0 and newer (API 23+) |
-| Application ID | `info.pakkudev.simple_dialer` |
-| Version | 1.0.3 (28) |
-| UI | Jetpack Compose, Material 3 |
-| State and storage | Kotlin coroutines, StateFlow, DataStore |
-| Dependency injection | Koin |
-
-## Features
-
-- Contacts with search, photos, pull-to-refresh, and access to the system contact editor.
-- Recent calls grouped by phone number, showing the latest call for each number.
-- Favorites from starred device contacts and a separate list saved in the app.
-- Dialpad with touch tones and an in-call keypad for DTMF.
-- Incoming call controls with buttons, vertical swipes, or a horizontal slide, plus a preview in Settings.
-- In-call mute, speaker, hold, swap, and add-call controls, subject to device and carrier support.
-- Optional proximity-based auto answer and auto speaker, both disabled by default.
-- Independent tab visibility, optional contact details, five color palettes, and light/dark appearance.
-- Translations for 17 languages across 19 locale variants, including right-to-left layouts.
-
-The launcher uses the localized name **Phone** or its equivalent. Android's app settings and default-phone dialogs identify it as **Simple Dialer**.
-
 ## Build
 
 Requirements:
