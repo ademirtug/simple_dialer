@@ -31,14 +31,6 @@ $env:JAVA_HOME = 'C:\Program Files\Android\Android Studio\jbr'
 
 The debug APK is written to `app/build/outputs/apk/debug/app-debug.apk`.
 
-## Device setup
-
-Select Simple Dialer as the default phone app and grant the permissions needed for the features you use. Incoming calls also require notifications and full-screen access on Android versions that provide those controls. Contacts and call-history access are optional; manual dialing remains available when either is denied.
-
-On Xiaomi, Redmi, and Poco devices, check **Show on Lock screen** and **Open new windows while running in the background** in the app's MIUI permission settings. These permissions are separate from Android's notification and full-screen settings.
-
-Auto answer requires an uncovered proximity sensor for 0.5 seconds followed by a nearby object for 0.8 seconds. Auto speaker switches to speaker after 1.5 seconds of an uncovered sensor during an active call. Wired and Bluetooth headset routing takes precedence.
-
 ## Project structure
 
 | Directory | Purpose |
@@ -52,31 +44,3 @@ Auto answer requires an uncovered proximity sensor for 0.5 seconds followed by a
 | `docs` | Architecture, localization, and publishing notes |
 
 See [Architecture](docs/architecture.md) for module boundaries and state management, and [Localization](docs/localization.md) for supported locales and translation checks.
-
-## Verification
-
-The Windows verification script checks translations, runs unit tests, builds the debug APK, runs Android lint, and checks the native libraries for 16 KB page compatibility:
-
-```powershell
-.\scripts\verify.ps1
-```
-
-Add `-IncludeRelease` to verify the release APK as well. The scripts require Python 3 in addition to the Android build tools.
-
-To run unit tests and lint directly:
-
-```sh
-./gradlew :domain:test :platform:testDebugUnitTest :data:testDebugUnitTest :app:testDebugUnitTest :app:lintDebug
-python scripts/validate_localizations.py
-```
-
-Instrumentation tests run on a connected test device or emulator with `:app:connectedDebugAndroidTest`. The simulated-call tests require a disposable emulator:
-
-```powershell
-.\scripts\seed-emulator-contacts.ps1 -Serial emulator-5554
-.\scripts\test-emulator-call.ps1 -Serial emulator-5554
-.\scripts\test-emulator-call.ps1 -Serial emulator-5554 -AutoModes
-.\scripts\test-emulator-call.ps1 -Serial emulator-5554 -LockedScreen
-```
-
-The fixtures use fictional contacts. Simulated calls do not exercise cellular audio or carrier services. Lock-screen behavior, call waiting, dual SIM, conference calls, and translations still need review on the intended devices and networks.
